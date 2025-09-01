@@ -1,0 +1,36 @@
+Step-by-step Instructions
+
+1. Sync your SharePoint library
+   Open OneDrive, locate the CustomerHub library and select Sync. Confirm you can browse your PDF files under:
+   C:\Users\MarkAnderson\Valorem\Customer Hub - Documents\...
+
+2. Prepare your Excel workbook
+   Open Python_CustomerPricing.xlsx. Ensure row 4 contains these headers:
+     EmailAddresses | CustomerName | RecipientName | FilePath | FileName
+   Under FilePath enter the local folder path, for example:
+     C:\Users\MarkAnderson\Valorem\Customer Hub - Documents\Atlantic Performance Oils\Pricing\
+   Under FileName enter the exact PDF name, for example:
+     Atlantic_Performance_Oils_Jun25.pdf
+
+3. Close the workbook
+   Save and close Excel so the script can open it without error
+
+4. Install Python dependencies
+   pip install pandas pywin32
+
+5. Verify the script path
+   Place create_drafts.py in the same folder as your workbook or update the excel_file path in the script to point at its location
+
+6. Run the script
+   Open a command prompt in the script folder and run:
+     python create_drafts.py
+
+7. Check the console output
+   Lines starting with ✓ indicate each draft was created
+   Lines starting with ⚠ indicate a missing file—check your paths and file names
+
+8. Review and send
+   Open Outlook’s Drafts folder, review each message, make any edits and send when ready
+
+9. Further help
+   If you have issues, confirm that Excel is closed, you have read access to the XLSX and PDF folders, and that Outlook is signed in. Contact your IT team or email support@valorem.com.au
