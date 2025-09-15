@@ -1,0 +1,60 @@
+{
+  "templates": {
+    "default": {
+      "name": "Standard Monthly Update",
+      "subject": "Monthly Pricing Update for {customer_name}",
+      "body": {
+        "greeting": "Hi {recipient_name},",
+        "main_message": "Just a quick note to share the updated pricing for your account - attached for reference.",
+        "pricing_note": "No change in pricing for {month}, as FX movement stayed within the 2% band.",
+        "closing": "Thanks,"
+      }
+    },
+    "price_increase": {
+      "name": "Price Increase Notification",
+      "subject": "Important: Pricing Update for {customer_name} - {month}",
+      "body": {
+        "greeting": "Hi {recipient_name},",
+        "main_message": "I'm writing to inform you of pricing adjustments for your account, effective {effective_date}.",
+        "pricing_note": "Due to {reason}, we need to implement a {percentage}% increase in pricing. Please find the updated pricing sheet attached.",
+        "closing": "Please don't hesitate to reach out if you have any questions."
+      }
+    },
+    "no_change": {
+      "name": "No Change - Standard",
+      "subject": "Monthly Pricing Update for {customer_name}",
+      "body": {
+        "greeting": "Hi {recipient_name},",
+        "main_message": "Your monthly pricing update is attached for reference.",
+        "pricing_note": "No pricing changes this month - all rates remain the same as {previous_month}.",
+        "closing": "Thanks,"
+      }
+    }
+  },
+  "signature": {
+    "name": "Mark Anderson",
+    "title": "Managing Director",
+    "company": "Valorem Chemicals Pty Ltd",
+    "phone": "+61 417 725 006",
+    "email": "marka@valorem.com.au",
+    "website": "www.valorem.com.au",
+    "company_color": "rgb(74, 144, 226)"
+  },
+  "default_values": {
+    "month": "{current_month}",
+    "previous_month": "{previous_month}",
+    "effective_date": "{first_of_next_month}",
+    "reason": "currency fluctuations and supplier cost increases",
+    "percentage": "3.5"
+  },
+  "placeholders": {
+    "customer_name": "Customer name from Excel",
+    "recipient_name": "Recipient name from Excel", 
+    "current_month": "Current month name",
+    "previous_month": "Previous month name",
+    "first_of_next_month": "First day of next month",
+    "end_of_quarter": "Last day of current quarter",
+    "reason": "Reason for price change",
+    "percentage": "Percentage increase/decrease"
+  }
+}
