@@ -10,7 +10,8 @@
       "Bash(git commit:*)",
       "Bash(scriptsbump_version.bat minor)",
       "Bash(scripts/bump_version.bat minor)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(bump2version:*)"
     ],
     "deny": [],
     "ask": []

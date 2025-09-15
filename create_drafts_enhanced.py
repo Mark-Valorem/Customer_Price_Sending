@@ -11,7 +11,21 @@ def load_email_templates():
     try:
         templates_file = os.path.join(os.path.dirname(__file__), 'email_templates.json')
         with open(templates_file, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            templates_data = json.load(f)
+
+        # Check for dashboard template
+        dashboard_template_file = os.path.join(os.path.dirname(__file__), 'monthly_drafts', 'dashboard_template.json')
+        if os.path.exists(dashboard_template_file):
+            try:
+                with open(dashboard_template_file, 'r', encoding='utf-8') as f:
+                    dashboard_data = json.load(f)
+                    # Merge dashboard templates with existing templates
+                    templates_data['templates'].update(dashboard_data.get('templates', {}))
+                    print("✓ Dashboard template loaded")
+            except Exception as e:
+                print(f"⚠ Error loading dashboard template: {e}")
+
+        return templates_data
     except FileNotFoundError:
         print("⚠ email_templates.json not found. Using default template.")
         return create_default_template()
@@ -143,21 +157,41 @@ def customize_template_values(template, templates_data):
 
 def build_html_email_body(template, signature, custom_values, customer_name, recipient_name):
     """Build the HTML email body from template"""
-    
+
     # Prepare all values for substitution
     all_values = custom_values.copy()
     all_values.update({
         'customer_name': customer_name,
         'recipient_name': recipient_name
     })
-    
+
     # Get template body parts
     body = template.get('body', {})
-    greeting = body.get('greeting', 'Hi {recipient_name},').format(**all_values)
-    main_message = body.get('main_message', '').format(**all_values)
-    pricing_note = body.get('pricing_note', '').format(**all_values)
-    closing = body.get('closing', 'Thanks,').format(**all_values)
-    
+
+    # Check if this is a dashboard template (has single 'content' field)
+    if 'content' in body:
+        # Dashboard template - format the entire content
+        content_html = body.get('content', '').format(**all_values)
+        # Convert line breaks to HTML
+        content_html = content_html.replace('\n', '<br>')
+        body_content = f"<p>{content_html}</p>"
+    else:
+        # Standard template - use structured fields
+        greeting = body.get('greeting', 'Hi {recipient_name},').format(**all_values)
+        main_message = body.get('main_message', '').format(**all_values)
+        pricing_note = body.get('pricing_note', '').format(**all_values)
+        closing = body.get('closing', 'Thanks,').format(**all_values)
+
+        body_content = f"""
+            <p>{greeting}</p>
+
+            <p>{main_message}</p>
+
+            <p>{pricing_note}</p>
+
+            <p>{closing}</p>
+        """
+
     # Build signature
     sig_html = f"""
     <p>
@@ -169,29 +203,23 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
         Web: {signature.get('website', 'www.valorem.com.au')}
     </p>
     """
-    
+
     # Combine into full HTML
     html_body = f"""
     <html>
         <body style="font-family: Arial, sans-serif;">
-            <p>{greeting}</p>
-            
-            <p>{main_message}</p>
-            
-            <p>{pricing_note}</p>
-            
-            <p>{closing}</p>
-            
+            {body_content}
+
             {sig_html}
-            
+
             <p style="font-size: 10px;">
-                This email and any files transmitted with it are confidential and 
+                This email and any files transmitted with it are confidential and
                 intended solely for the use of the individual or entity to whom they are addressed.
             </p>
         </body>
     </html>
     """
-    
+
     return html_body
 
 def create_email_drafts():
