@@ -31,7 +31,43 @@ python diagnose_excel.py    # Detailed Excel structure analysis
 
 ### Installing dependencies
 ```bash
+# Production dependencies only
+pip install -r requirements.txt
+
+# Development dependencies (includes testing, linting, versioning tools)
+pip install -e ".[dev]"
+
+# Manual installation of core dependencies
 pip install pandas pywin32 openpyxl python-dateutil
+```
+
+### Version management
+```bash
+# Bump patch version (0.1.0 → 0.1.1)
+scripts\bump_version.bat patch
+
+# Bump minor version (0.1.0 → 0.2.0)
+scripts\bump_version.bat minor
+
+# Bump major version (0.1.0 → 1.0.0)
+scripts\bump_version.bat major
+
+# Preview changes without making them
+scripts\bump_version.bat patch --dry-run
+```
+
+### Development workflow
+```bash
+# Set up development environment
+pip install -e ".[dev]"
+pre-commit install
+pre-commit install --hook-type commit-msg
+
+# Run code quality checks
+pre-commit run --all-files
+
+# Run tests
+pytest tests/ -v --cov=src
 ```
 
 ## Architecture
@@ -123,5 +159,29 @@ This project follows Python best practices with the following organization:
 - Enhanced version requires python-dateutil package
 - Original functionality preserved in create_drafts.py for backward compatibility
 
+## Version Management and Release Process
+
+This project implements semantic versioning with automated tooling:
+
+### Versioning System
+- **Current Version**: Tracked in pyproject.toml and src/__init__.py
+- **Bump2version**: Automated version bumping with git tagging
+- **Conventional Commits**: Enforced commit message format
+- **Changelog**: Automatically generated from commit history
+- **GitHub Actions**: CI/CD pipeline for testing and releases
+
+### Release Workflow
+1. **Development**: Follow conventional commit format
+2. **Version Bump**: Use scripts/bump_version.bat with patch/minor/major
+3. **Automatic**: Git commit, tag creation, and push to remote
+4. **CI/CD**: GitHub Actions builds, tests, and creates releases
+5. **Artifacts**: Distribution packages and changelog generation
+
+### Code Quality Standards
+- **Pre-commit hooks**: Formatting, linting, security scanning
+- **Testing**: pytest with coverage reporting
+- **Documentation**: Comprehensive README.md and CONTRIBUTING.md
+- **Security**: bandit scanning for vulnerabilities
+
 ## AI Guidance
-This file is used by Claude Code to understand the project structure and provide appropriate development assistance. The project is transitioning from a script-based approach to a more structured Python package layout for better maintainability and testing.
+This file is used by Claude Code to understand the project structure and provide appropriate development assistance. The project follows modern Python development practices with automated versioning, testing, and release workflows.

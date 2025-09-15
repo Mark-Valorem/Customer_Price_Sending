@@ -67,6 +67,35 @@ A Python-based automation system for creating Outlook email drafts with customer
 - **openpyxl**: Excel file manipulation
 - **HTML/CSS**: Template formatting
 
+## Development and Versioning
+
+This project follows semantic versioning (SemVer) and includes automated development workflows:
+
+### Version Management
+- **Semantic Versioning**: MAJOR.MINOR.PATCH format
+- **Automated Bumping**: Use `scripts/bump_version.bat` (Windows) or `scripts/bump_version.sh` (Linux/Mac)
+- **Git Integration**: Automatic tagging and changelog generation
+
+### Code Quality
+- **Pre-commit Hooks**: Automated code formatting, linting, and validation
+- **Conventional Commits**: Standardized commit message format
+- **CI/CD Pipeline**: GitHub Actions for testing and releases
+
+### Quick Development Setup
+```bash
+# Install with development dependencies
+pip install -e ".[dev]"
+
+# Set up pre-commit hooks
+pre-commit install
+pre-commit install --hook-type commit-msg
+
+# Bump version (patch/minor/major)
+scripts\bump_version.bat patch
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
+
 ## Important Notes
 
 - Requires Outlook to be installed and configured
