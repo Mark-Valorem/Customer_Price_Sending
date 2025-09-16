@@ -1,0 +1,30 @@
+{
+  "templates": {
+    "dashboard_custom": {
+      "name": "Dashboard Template - September 2025",
+      "subject": "Monthly Pricing Update for {customer_name}",
+      "body": {
+        "content": "Hi {recipient_name},\n\nJust a quick note to share the updated pricing for your account - attached for reference.\n\nNo change in pricing for {month}, as FX movement stayed within the 2% band.\n\nThanks,"
+      }
+    }
+  },
+  "signature": {
+    "name": "Mark Anderson",
+    "title": "Managing Director",
+    "company": "Valorem Chemicals Pty Ltd",
+    "phone": "+61 417 725 006",
+    "email": "marka@valorem.com.au",
+    "website": "www.valorem.com.au",
+    "company_color": "rgb(74, 144, 226)"
+  },
+  "default_values": {
+    "month": "September",
+    "previous_month": "August",
+    "effective_date": "October 1, 2025",
+    "reason": "currency fluctuations and supplier cost increases",
+    "percentage": "3.5",
+    "current_month": "September",
+    "first_of_next_month": "October 1, 2025",
+    "end_of_quarter": "September 30, 2025"
+  }
+}
