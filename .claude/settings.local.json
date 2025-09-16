@@ -11,7 +11,10 @@
       "Bash(scriptsbump_version.bat minor)",
       "Bash(scripts/bump_version.bat minor)",
       "Bash(pip install:*)",
-      "Bash(bump2version:*)"
+      "Bash(bump2version:*)",
+      "Bash(python test_dashboard_integration.py)",
+      "Bash(python test:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
