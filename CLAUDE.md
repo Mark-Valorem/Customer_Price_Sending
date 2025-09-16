@@ -7,26 +7,26 @@ This codebase automates the creation of Outlook email drafts for sending monthly
 
 ## Key Commands
 
-### Running scripts
+### Running the application
 ```bash
-# Original version (hardcoded templates)
-python create_drafts.py
+# Modern GUI Dashboard (RECOMMENDED)
+python dashboard.py
+# Or double-click: run_dashboard.vbs
 
-# Enhanced version (with customizable templates)
+# Enhanced CLI version (alternative interface)
 python create_drafts_enhanced.py
+# Or double-click: run_enhanced_price_sender.vbs
 
-# Template management
+# Template management utility
 python manage_templates.py
-
-# Easy launching (double-click VBS files)
-run_price_sender.vbs                # Original version
-run_enhanced_price_sender.vbs       # Enhanced version
 ```
 
-### Diagnostic and utility scripts
+### Legacy/Archived scripts
 ```bash
-python check_columns.py     # Verify Excel column names
-python diagnose_excel.py    # Detailed Excel structure analysis
+# These scripts are now in Archive/ for reference only:
+# Archive/legacy_cli_scripts/create_drafts.py       # Original CLI version
+# Archive/legacy_cli_scripts/check_columns.py       # Column verification
+# Archive/legacy_cli_scripts/diagnose_excel.py      # Excel diagnostics
 ```
 
 ### Installing dependencies
@@ -73,14 +73,21 @@ pytest tests/ -v --cov=src
 ## Architecture
 
 ### Core Components
-- **create_drafts.py**: Original script with hardcoded email template
-- **create_drafts_enhanced.py**: Enhanced script with customizable templates, interactive selection, and monthly customization
+- **dashboard.py**: Modern GUI application with two-column layout, debugging features, and bug fixes (CURRENT MAIN INTERFACE)
+- **src/email_generator.py**: Core email generation module used by dashboard and CLI versions
+- **create_drafts_enhanced.py**: Enhanced CLI script with customizable templates (backup/alternative interface)
 - **email_templates.json**: Template configuration file containing multiple email templates, signature, and default values
 - **manage_templates.py**: Interactive template management utility for creating/editing email templates
 - **Python_CustomerPricing.xlsx**: Source Excel file containing customer data with headers on row 4 (0-indexed row 3)
-- **VBS launchers**: Double-click scripts for easy execution (run_price_sender.vbs, run_enhanced_price_sender.vbs)
-- **Backup files**: Original versions preserved (*_backup.py)
-- **Check/diagnostic scripts**: Utilities for troubleshooting Excel column mapping issues
+- **monthly_drafts/**: Directory for storing monthly draft templates and configurations
+- **VBS launchers**: Double-click scripts for easy execution (run_dashboard.vbs, run_enhanced_price_sender.vbs)
+
+### Archived Components (in Archive/)
+- **legacy_cli_scripts/**: Original CLI scripts (create_drafts.py, check_columns.py, diagnose_excel.py)
+- **development_tests/**: Test files used during development (test_*.py)
+- **unused_web_interface/**: Placeholder web templates (not implemented)
+- **sandbox_data/**: Test data files
+- **generated_files/**: Python cache and build artifacts
 
 ### Data Flow
 1. Excel file is read using pandas with header on row 3 (0-indexed)
@@ -95,7 +102,28 @@ pytest tests/ -v --cov=src
 - Excel workbook: `C:\Users\MarkAnderson\Valorem\Knowledge Hub - Documents\Pricing\Customer Price Lists\Price Sheet Sending_Python\Python_CustomerPricing.xlsx`
 - PDF attachments: Synced from SharePoint via OneDrive to local paths specified in Excel
 
-## Enhanced Features (create_drafts_enhanced.py)
+## Dashboard Features (dashboard.py) - CURRENT MAIN INTERFACE
+
+### User Interface
+- **Two-Column Layout**: 60% left (email content/preview), 40% right (controls)
+- **Responsive Design**: Columns stack on narrow screens
+- **Minimum Heights**: Draft area (400px), Preview (300px), Debug panel (150px)
+
+### Key Features
+- **Email Draft Editor**: Full-featured text editor with syntax highlighting for templates
+- **Live Preview**: Real-time preview with sample customer data and variable resolution
+- **Monthly Management**: Load/save/edit drafts by month and year
+- **Template Variables**: Automatic resolution of {current_month}, {previous_month}, etc.
+- **Debug Mode**: Comprehensive debugging with timestamped console output
+- **Error Handling**: Detailed error messages with troubleshooting steps
+- **Progress Tracking**: Real-time progress bar during email generation
+
+### Bug Fixes (v0.3.0)
+- **Fixed Duplicate Signatures**: Automatic signature stripping prevents duplication
+- **Fixed Variable Resolution**: {current_month} and other variables now resolve correctly
+- **Enhanced Error Handling**: Better error reporting with actionable information
+
+## Enhanced Features (create_drafts_enhanced.py) - CLI Alternative
 - **Template Selection**: Choose from multiple pre-defined email templates (default, price_increase, no_change, promotional)
 - **Monthly Customization**: Interactive prompt to customize template values each month (pricing notes, dates, percentages, etc.)
 - **Template Preview**: See how the email will look before creating all drafts
@@ -112,52 +140,63 @@ Templates are stored in email_templates.json with:
 
 ## Project Structure
 
-This project follows Python best practices with the following organization:
+This project follows Python best practices with clean organization:
 
 ```
-├── src/                    # Python source code modules
-│   ├── __init__.py        # Package initialization
-│   └── main.py           # Main entry point (future refactoring target)
-├── templates/             # HTML templates for web interface
-│   └── index.html        # Main HTML template
-├── static/               # Static assets (CSS, JavaScript, images)
-│   └── styles.css        # Main stylesheet
-├── tests/                # Test files
-│   ├── __init__.py       # Test package initialization
-│   └── test_main.py      # Main functionality tests
-├── Archive/              # Legacy and backup files
-├── create_drafts.py      # Original automation script (legacy)
-├── create_drafts_enhanced.py  # Enhanced version (current)
-├── manage_templates.py   # Template management utility
-├── email_templates.json  # Email template configurations
-├── requirements.txt      # Python dependencies
-├── README.md            # Project documentation
-└── CLAUDE.md           # AI guidance (this file)
+├── src/                         # Core Python modules
+│   ├── __init__.py             # Package initialization
+│   ├── main.py                 # Entry point for package
+│   └── email_generator.py      # Core email generation logic
+├── monthly_drafts/             # Monthly draft storage
+│   ├── 2025_09.txt            # Monthly draft templates
+│   └── dashboard_template.json # Dashboard-generated templates
+├── logs/                       # Application logs
+├── tests/                      # Test files (proper test structure)
+│   ├── __init__.py            # Test package initialization
+│   └── test_main.py           # Main functionality tests
+├── scripts/                    # Utility scripts
+│   ├── bump_version.bat       # Version management (Windows)
+│   └── bump_version.sh        # Version management (Unix)
+├── Archive/                    # Organized archived files
+│   ├── legacy_cli_scripts/    # Original CLI scripts
+│   ├── development_tests/     # Development test files
+│   ├── unused_web_interface/  # Placeholder web files
+│   ├── sandbox_data/          # Test data files
+│   ├── generated_files/       # Build artifacts
+│   └── old_logs/             # Historical log files
+├── dashboard.py               # Main GUI application (CURRENT INTERFACE)
+├── create_drafts_enhanced.py  # Enhanced CLI version (backup interface)
+├── manage_templates.py        # Template management utility
+├── email_templates.json       # Email template configurations
+├── Python_CustomerPricing.xlsx # Production data file
+├── requirements.txt           # Python dependencies
+├── pyproject.toml            # Modern Python project configuration
+├── README.md                 # Project documentation
+└── CLAUDE.md                # AI guidance (this file)
 ```
 
 ### Tech Stack & Structure
-- **Backend**: Python with pandas, pywin32, openpyxl
-- **Frontend**: HTML/CSS templates for future web interface
-- **Data**: Excel files for customer information
-- **Integration**: Microsoft Outlook automation
+- **GUI Interface**: Python tkinter with modern two-column design
+- **Backend**: Python with pandas, pywin32, openpyxl, python-dateutil
+- **Data Processing**: Excel file reading with pandas
+- **Email Generation**: Microsoft Outlook COM automation
 - **Testing**: Python unittest framework (structure ready)
 
 ### Development Guidelines
-- Main scripts are currently in root directory (legacy structure)
-- Future development should utilize the `src/` directory for modular code
-- HTML templates in `templates/` for any web interface development
-- Static assets in `static/` for CSS, JavaScript, images
-- Tests in `tests/` directory following Python testing conventions
-- Use `requirements.txt` for dependency management
+- **Current Structure**: Modern Python package structure with main application in root
+- **Core Logic**: Centralized in `src/` directory for reusability
+- **Archive Organization**: Legacy files organized by category in `Archive/`
+- **Tests**: Proper test structure in `tests/` directory
+- **Documentation**: Comprehensive README.md and CONTRIBUTING.md
 
 ## Important Notes
-- Excel file must be closed before running scripts
-- Outlook must be installed, configured, and signed in
-- PDF files must exist at the exact paths specified in Excel (FilePath + FileName)
-- Headers are on row 4 of Excel (row 3 when 0-indexed in pandas)
-- Script creates drafts only - manual review and sending required
-- Enhanced version requires python-dateutil package
-- Original functionality preserved in create_drafts.py for backward compatibility
+- **Excel Requirements**: File must be closed before running scripts
+- **Outlook Requirements**: Must be installed, configured, and signed in
+- **File Paths**: PDF files must exist at exact paths specified in Excel (FilePath + FileName)
+- **Data Structure**: Headers are on row 4 of Excel (row 3 when 0-indexed in pandas)
+- **Email Safety**: Scripts create drafts only - manual review and sending required
+- **Dependencies**: All required packages listed in requirements.txt and pyproject.toml
+- **Backward Compatibility**: Original functionality preserved in Archive/legacy_cli_scripts/ for reference
 
 ## Version Management and Release Process
 

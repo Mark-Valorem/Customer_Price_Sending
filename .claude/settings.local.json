@@ -14,7 +14,8 @@
       "Bash(bump2version:*)",
       "Bash(python test_dashboard_integration.py)",
       "Bash(python test:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(git tag:*)"
     ],
     "deny": [],
     "ask": []
