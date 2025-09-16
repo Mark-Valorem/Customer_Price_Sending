@@ -1,70 +1,100 @@
 # Customer Price Sheet Automation
 
-A Python-based automation system for creating Outlook email drafts with customer price sheets. This system reads customer data from Excel files and generates personalized email drafts with PDF attachments for monthly price sheet distribution.
+A modern Python automation system for creating Outlook email drafts with customer price sheets. Features a user-friendly GUI dashboard with debugging capabilities, plus CLI alternatives for advanced users.
 
 ## Features
 
+### 🎯 Modern GUI Dashboard (v0.3.0)
+- **Two-Column Interface**: Intuitive design with draft editor and controls
+- **Live Preview**: Real-time email preview with sample customer data
+- **Debug Mode**: Comprehensive debugging with timestamped console output
+- **Monthly Management**: Load, edit, and save drafts by month/year
+- **Bug Fixes**: Resolved duplicate signatures and variable resolution issues
+
+### 🔧 Core Automation
 - **Automated Email Draft Creation**: Creates Outlook drafts with customer-specific content
 - **Template Management**: Multiple customizable email templates with placeholders
-- **Interactive Configuration**: Monthly customization of template values
 - **Excel Integration**: Reads customer data from Excel workbooks
 - **PDF Attachment Support**: Automatically attaches customer-specific price sheets
 - **Safety Features**: Creates drafts only (no automatic sending)
 
 ## Quick Start
 
+### Option 1: GUI Dashboard (Recommended)
 1. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. Run the enhanced version with template selection:
+2. Launch the modern dashboard:
    ```bash
-   python create_drafts_enhanced.py
+   python dashboard.py
    ```
+   Or double-click: `run_dashboard.vbs`
 
-3. Or use the VBS launcher for easy execution:
-   - Double-click `run_enhanced_price_sender.vbs`
+### Option 2: CLI Version (Alternative)
+```bash
+python create_drafts_enhanced.py
+```
+Or double-click: `run_enhanced_price_sender.vbs`
 
 ## Project Structure
 
 ```
-├── src/                    # Python source code
-│   ├── __init__.py
-│   └── main.py            # Main entry point
-├── templates/             # HTML templates
-│   └── index.html
-├── static/               # Static assets (CSS, images)
-│   └── styles.css
-├── tests/                # Test files
-│   ├── __init__.py
-│   └── test_main.py
-├── Archive/              # Archived/backup files
-├── create_drafts.py      # Original automation script
-├── create_drafts_enhanced.py  # Enhanced version with templates
-├── manage_templates.py   # Template management utility
-├── email_templates.json  # Email template configurations
-├── check_columns.py      # Excel column verification
-├── diagnose_excel.py     # Excel structure analysis
-├── requirements.txt      # Python dependencies
-├── CLAUDE.md            # AI assistance guidelines
-└── README.md           # This file
+├── src/                         # Core Python modules
+│   ├── __init__.py             # Package initialization
+│   ├── main.py                 # Package entry point
+│   └── email_generator.py      # Core email generation logic
+├── monthly_drafts/             # Monthly draft storage
+├── logs/                       # Application logs
+├── tests/                      # Test files
+├── scripts/                    # Version management utilities
+├── Archive/                    # Organized archived files
+│   ├── legacy_cli_scripts/    # Original CLI tools
+│   ├── development_tests/     # Development phase tests
+│   ├── unused_web_interface/  # Placeholder web files
+│   ├── sandbox_data/          # Test data files
+│   └── generated_files/       # Build artifacts
+├── dashboard.py               # 🎯 Main GUI application
+├── create_drafts_enhanced.py  # CLI alternative interface
+├── manage_templates.py        # Template management utility
+├── email_templates.json       # Email template configurations
+├── Python_CustomerPricing.xlsx # Production data file
+├── pyproject.toml            # Modern Python project config
+└── requirements.txt          # Dependencies
 ```
 
 ## Key Components
 
-- **Core Scripts**: `create_drafts.py` (original), `create_drafts_enhanced.py` (enhanced)
-- **Template System**: `email_templates.json` for customizable email templates
-- **Management Tools**: `manage_templates.py` for template editing
-- **Diagnostic Tools**: `check_columns.py`, `diagnose_excel.py` for troubleshooting
-- **VBS Launchers**: Easy double-click execution scripts
+### Active Applications
+- **`dashboard.py`**: Modern GUI with two-column layout, debugging, and bug fixes ⭐ **MAIN INTERFACE**
+- **`create_drafts_enhanced.py`**: Enhanced CLI version (backup/alternative interface)
+- **`src/email_generator.py`**: Core email generation module (shared by both interfaces)
+- **`manage_templates.py`**: Template management utility
+
+### Configuration & Data
+- **`email_templates.json`**: Customizable email templates with placeholders
+- **`Python_CustomerPricing.xlsx`**: Production customer data
+- **`monthly_drafts/`**: Monthly draft storage and configurations
+
+### Archived Components
+- All legacy tools, test files, and unused components organized in `Archive/` by category
 
 ## Technologies Used
 
-- **Python**: Core automation logic
-- **pandas**: Excel file processing
-- **pywin32**: Outlook integration
-- **openpyxl**: Excel file manipulation
+- **Python 3.8+**: Core automation logic
+- **tkinter**: Modern GUI dashboard interface
+- **pandas**: Excel file processing and data manipulation
+- **pywin32**: Microsoft Outlook COM automation
+- **openpyxl**: Excel file reading and manipulation
+- **python-dateutil**: Date calculations and formatting
+
+## Version Information
+
+- **Current Version**: 0.3.0
+- **Major Features**: Dashboard GUI, bug fixes, comprehensive debugging
+- **Compatibility**: Windows (requires Microsoft Outlook)
+- **Python Support**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 - **HTML/CSS**: Template formatting
 
 ## Development and Versioning
