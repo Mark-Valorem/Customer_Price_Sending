@@ -1,5 +1,6 @@
 ' Valorem Chemicals - Email Draft Dashboard Launcher
 ' This script launches the monthly email draft dashboard GUI
+' Updated to support both original and enhanced dashboards
 
 Set objShell = CreateObject("WScript.Shell")
 Set objFSO = CreateObject("Scripting.FileSystemObject")
@@ -10,7 +11,7 @@ strScriptPath = objFSO.GetParentFolderName(WScript.ScriptFullName)
 ' Change to the script directory
 objShell.CurrentDirectory = strScriptPath
 
-' Path to the Python script
+' Path to the Python script (stable version)
 strPythonScript = objFSO.BuildPath(strScriptPath, "dashboard.py")
 
 ' Check if the Python script exists
