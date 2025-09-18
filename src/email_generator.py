@@ -90,22 +90,36 @@ def create_default_template():
     }
 
 
-def get_date_placeholders():
-    """Generate date-based placeholder values"""
-    today = date.today()
-    current_month = today.strftime("%B")
-    previous_month = (today.replace(day=1) - relativedelta(months=1)).strftime("%B")
-    first_of_next_month = (today.replace(day=1) + relativedelta(months=1)).strftime("%B 1, %Y")
+def get_date_placeholders(selected_month=None, selected_year=None):
+    """Generate date-based placeholder values
 
-    # Calculate end of quarter
-    quarter = (today.month - 1) // 3 + 1
+    Args:
+        selected_month: Optional month number (1-12)
+        selected_year: Optional year number
+    """
+    if selected_month and selected_year:
+        # Use selected date
+        base_date = date(selected_year, selected_month, 1)
+    else:
+        # Use current date (backward compatibility)
+        base_date = date.today()
+
+    current_month = base_date.strftime("%B")
+    current_year = base_date.year
+    previous_month = (base_date.replace(day=1) - relativedelta(months=1)).strftime("%B")
+    first_of_next_month = (base_date.replace(day=1) + relativedelta(months=1)).strftime("%B 1, %Y")
+
+    # Calculate end of quarter based on selected date
+    quarter = (base_date.month - 1) // 3 + 1
     end_of_quarter_month = quarter * 3
-    end_of_quarter = date(today.year, end_of_quarter_month, 1) + relativedelta(months=1, days=-1)
+    end_of_quarter = date(base_date.year, end_of_quarter_month, 1) + relativedelta(months=1, days=-1)
 
     return {
         "current_month": current_month,
+        "current_year": current_year,
         "previous_month": previous_month,
         "first_of_next_month": first_of_next_month,
+        "effective_date": first_of_next_month,  # Alias for first_of_next_month
         "end_of_quarter": end_of_quarter.strftime("%B %d, %Y"),
         "month": current_month
     }
@@ -140,10 +154,16 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
     # Check if this is a dashboard template (has single 'content' field)
     if 'content' in body:
         # Dashboard template - format the entire content
-        content_html = body.get('content', '').format(**all_values)
-        # Convert line breaks to HTML
-        content_html = content_html.replace('\n', '<br>')
-        body_content = f"<p>{content_html}</p>"
+        try:
+            content_html = body.get('content', '').format(**all_values)
+            # Convert line breaks to HTML
+            content_html = content_html.replace('\n', '<br>')
+            body_content = f"<p>{content_html}</p>"
+        except KeyError as e:
+            logger.error(f"Missing placeholder key in template: {e}")
+            logger.error(f"Available keys: {list(all_values.keys())}")
+            logger.error(f"Template content: {body.get('content', '')[:200]}...")
+            raise
     else:
         # Standard template - use structured fields
         greeting = body.get('greeting', 'Hi {recipient_name},').format(**all_values)
@@ -222,6 +242,9 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
     logger.info("Starting email draft generation")
     logger.info(f"Template key: {template_key}")
     logger.info(f"Custom values provided: {bool(custom_values)}")
+    if custom_values:
+        logger.debug(f"Selected month from dashboard: {custom_values.get('selected_month', 'NOT PROVIDED')}")
+        logger.debug(f"Selected year from dashboard: {custom_values.get('selected_year', 'NOT PROVIDED')}")
 
     # Initialize COM for this thread
     com_initialized = False
@@ -277,64 +300,105 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
             results['errors'].append(error_msg)
             raise Exception(error_msg)
 
-        # Read customer data from Excel
-        excel_file = r"C:\Users\MarkAnderson\Valorem\Knowledge Hub - Documents\Pricing\Customer Price Lists\Price Sheet Sending_Python\Python_CustomerPricing.xlsx"
+        # Read customer data from JSON database
+        database_file = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)),
+            "customer_database_v2.json"
+        )
 
         if progress_callback:
             progress_callback(10, 100, "Reading customer data...")
 
-        # Read the Excel file - headers are on row 3 (0-indexed)
-        logger.debug(f"Reading Excel file: {excel_file}")
-        if not os.path.exists(excel_file):
-            error_msg = f"Excel file not found: {excel_file}"
+        # Read the JSON database file
+        logger.debug(f"Reading customer database: {database_file}")
+        if not os.path.exists(database_file):
+            error_msg = f"Customer database not found: {database_file}"
             logger.error(error_msg)
             results['errors'].append(error_msg)
             raise FileNotFoundError(error_msg)
 
-        df = pd.read_excel(excel_file, header=3)
-        logger.info(f"Successfully read Excel file with {len(df)} rows")
+        with open(database_file, 'r', encoding='utf-8') as f:
+            database = json.load(f)
 
-        # Clean column names
-        df.columns = df.columns.str.strip()
-        logger.debug(f"Column names: {list(df.columns)}")
+        customers = database.get('customers', [])
+        logger.info(f"Successfully read customer database with {len(customers)} customers")
+        logger.debug(f"Database version: {database.get('version', 'unknown')}")
 
-        total_customers = len(df)
+        total_customers = len(customers)
+
+        # Get selected month/year from custom_values for dynamic file naming
+        selected_month = custom_values.get('selected_month', datetime.now().month)
+        selected_year = custom_values.get('selected_year', datetime.now().year)
+
+        # Enhanced debug logging for file naming
         logger.info(f"Processing {total_customers} customers")
+        logger.info(f"File naming will use: Month={selected_month}, Year={selected_year}")
+        logger.info(f"Expected file prefix pattern: {selected_year % 100:02d}{selected_month:02d}01_*.pdf")
 
         # Create a draft for each customer
-        for index, row in df.iterrows():
+        for index, customer in enumerate(customers):
             try:
+                # Skip inactive customers
+                if not customer.get('active', True):
+                    logger.debug(f"Skipping inactive customer: {customer.get('company_name', 'Unknown')}")
+                    continue
+
+                customer_name = customer.get('company_name', 'Unknown')
+
                 # Update progress
                 if progress_callback:
                     progress = 10 + int((index / total_customers) * 85)
-                    progress_callback(progress, 100, f"Creating draft for {row['CustomerName']}...")
+                    progress_callback(progress, 100, f"Creating draft for {customer_name}...")
 
                 # Create a new email draft
                 mail = outlook.CreateItem(0)  # 0 = Mail item
 
                 # Set the recipients
-                mail.To = row['EmailAddresses']
+                email_addresses = customer.get('email_addresses', [])
+                if isinstance(email_addresses, list):
+                    mail.To = ";".join(email_addresses)
+                else:
+                    mail.To = str(email_addresses)
 
                 # Set CC
                 mail.CC = "support@valorem.com.au;jasonn@valorem.com.au"
 
                 # Set the subject using template
                 subject_values = custom_values.copy()
-                subject_values['customer_name'] = row['CustomerName']
+                subject_values['customer_name'] = customer_name
                 mail.Subject = selected_template.get('subject', 'Monthly Pricing Update for {customer_name}').format(**subject_values)
+
+                # Get recipient names
+                recipient_names = customer.get('recipient_names', [])
+                if isinstance(recipient_names, list) and recipient_names:
+                    recipient_name = " and ".join(recipient_names)
+                else:
+                    recipient_name = "Team"
 
                 # Create the HTML body using template
                 mail.HTMLBody = build_html_email_body(
                     selected_template,
                     signature,
                     custom_values,
-                    row['CustomerName'],
-                    row['RecipientName']
+                    customer_name,
+                    recipient_name
                 )
 
-                # Attach the local file
-                folder = row.get('FilePath', '').strip()
-                filename = row.get('FileName', '').strip()
+                # Generate dynamic file name based on selected month/year
+                file_info = customer.get('file_generation', {})
+                folder = file_info.get('file_path', '').strip()
+
+                # Generate dynamic filename: YYMMDD_Pricing_CustomerName.pdf
+                # Use selected month/year from dashboard
+                date_prefix = f"{selected_year % 100:02d}{selected_month:02d}01"
+                file_body = file_info.get('file_body', f"_Pricing_{customer_name}.pdf")
+                filename = f"{date_prefix}{file_body}"
+
+                # Debug: Log the file we're looking for
+                logger.debug(f"Customer: {customer_name}")
+                logger.debug(f"  Looking for file: {filename}")
+                logger.debug(f"  In folder: {folder}")
+
                 attached_file = "No file specified"
 
                 if folder and filename:
@@ -342,35 +406,43 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
                     if os.path.exists(fullpath):
                         mail.Attachments.Add(fullpath)
                         attached_file = filename
+                        logger.info(f"✓ Successfully attached: {filename}")
+                        logger.debug(f"  Full path: {fullpath}")
                     else:
                         attached_file = f"{filename} (NOT FOUND)"
-                        results['errors'].append(f"File not found for {row['CustomerName']}: {fullpath}")
+                        logger.warning(f"✗ File not found: {fullpath}")
+                        # List available files in directory for debugging
+                        if os.path.exists(folder):
+                            available_files = [f for f in os.listdir(folder) if f.endswith('.pdf')]
+                            logger.debug(f"  Available PDF files in folder: {available_files[:5]}...")  # Show first 5
+                        results['errors'].append(f"File not found for {customer_name}: {fullpath}")
+                        logger.warning(f"File not found: {fullpath}")
 
                 # Save as draft
                 mail.Save()
 
                 # Record success
                 results['details'].append({
-                    'customer': row['CustomerName'],
-                    'email': row['EmailAddresses'],
+                    'customer': customer_name,
+                    'email': mail.To,
                     'attachment': attached_file,
                     'status': 'success'
                 })
                 results['drafts_created'] += 1
-                logger.debug(f"Successfully created draft for {row['CustomerName']}")
+                logger.debug(f"Successfully created draft for {customer_name}")
 
             except Exception as e:
                 # Record error
-                customer_name = row.get('CustomerName', 'Unknown')
+                customer_name = customer.get('company_name', 'Unknown')
                 error_msg = f"Error creating draft for {customer_name}: {str(e)}"
                 logger.error(error_msg)
-                logger.error(f"Row data: {row.to_dict()}")
+                logger.error(f"Customer data: {json.dumps(customer, indent=2)}")
                 logger.error(f"Traceback: {traceback.format_exc()}")
 
                 results['errors'].append(error_msg)
                 results['details'].append({
                     'customer': customer_name,
-                    'email': row.get('EmailAddresses', 'N/A'),
+                    'email': customer.get('email_addresses', 'N/A'),
                     'attachment': 'N/A',
                     'status': 'error',
                     'error': str(e)

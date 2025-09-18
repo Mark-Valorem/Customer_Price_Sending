@@ -15,7 +15,11 @@
       "Bash(python test_dashboard_integration.py)",
       "Bash(python test:*)",
       "Bash(python:*)",
-      "Bash(git tag:*)"
+      "Bash(git tag:*)",
+      "Bash(xcopy:*)",
+      "Bash(robocopy:*)",
+      "Bash(scriptsbump_version.bat patch)",
+      "Bash(scripts/bump_version.bat patch)"
     ],
     "deny": [],
     "ask": []
