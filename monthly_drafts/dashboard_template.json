@@ -1,10 +1,9 @@
 {
   "templates": {
     "dashboard_custom": {
-      "name": "Dashboard Template - September 2025",
-      "subject": "Monthly Pricing Update for {customer_name}",
+      "subject": "October 2025 - Price List from Valorem Chemicals",
       "body": {
-        "content": "Hi {recipient_name},\n\nJust a quick note to share the updated pricing for your account - attached for reference.\n\nNo change in pricing for {month}, as FX movement stayed within the 2% band.\n\nThanks,"
+        "content": "Hi {recipient_name},\n\nJust a quick note to share the updated pricing for your account - attached for reference.\n\nNo change in pricing for {current_month} {current_year}, as FX movement stayed within the 2% band."
       }
     }
   },
@@ -18,13 +17,16 @@
     "company_color": "rgb(74, 144, 226)"
   },
   "default_values": {
-    "month": "September",
-    "previous_month": "August",
-    "effective_date": "October 1, 2025",
+    "month": "October",
+    "previous_month": "September",
+    "effective_date": "November 1, 2025",
     "reason": "currency fluctuations and supplier cost increases",
     "percentage": "3.5",
-    "current_month": "September",
-    "first_of_next_month": "October 1, 2025",
-    "end_of_quarter": "September 30, 2025"
+    "current_month": "October",
+    "current_year": 2025,
+    "first_of_next_month": "November 1, 2025",
+    "end_of_quarter": "December 31, 2025",
+    "selected_month": 10,
+    "selected_year": 2025
   }
 }

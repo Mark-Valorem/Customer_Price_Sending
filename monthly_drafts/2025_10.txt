@@ -1,0 +1,5 @@
+Hi {recipient_name},
+
+Just a quick note to share the updated pricing for your account - attached for reference.
+
+No change in pricing for {current_month} {current_year}, as FX movement stayed within the 2% band.

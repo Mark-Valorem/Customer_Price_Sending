@@ -629,8 +629,8 @@ www.valorem.com.au"""
 
     def generate_all_drafts(self):
         """Generate all email drafts using the saved monthly template"""
-        # First, save the current draft
-        self.save_draft()
+        # NOTE: Removed auto-save per user request
+        # User should manually save draft if needed before generation
 
         # Prepare the monthly draft as a custom template
         content = self.draft_text.get(1.0, tk.END).strip()
@@ -673,7 +673,9 @@ www.valorem.com.au"""
                     self.add_debug_message("Loaded signature and default values from email_templates.json")
 
             # Fix Bug 2: Properly resolve date placeholders BEFORE creating template
-            date_placeholders = email_generator.get_date_placeholders()
+            # Use SELECTED month/year, not system date
+            self.add_debug_message(f"Using selected date: {month_name} {year_num} (Month #{month_num})")
+            date_placeholders = email_generator.get_date_placeholders(month_num, year_num)
 
             # Override default_values with actual resolved dates
             resolved_values = {}
@@ -691,6 +693,10 @@ www.valorem.com.au"""
 
             # Merge with actual date values
             resolved_values.update(date_placeholders)
+
+            # Add selected month/year for dynamic file naming in email_generator
+            resolved_values['selected_month'] = month_num
+            resolved_values['selected_year'] = year_num
 
             self.add_debug_message("Final resolved values:")
             for key, value in resolved_values.items():
