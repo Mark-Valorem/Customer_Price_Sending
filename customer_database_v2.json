@@ -1,0 +1,503 @@
+{
+  "version": "2.0.0",
+  "created_date": "2025-09-16T15:28:34.445389",
+  "migrated_from": "Python_CustomerPricing.xlsx",
+  "verification_enabled": true,
+  "migration_stats": {
+    "total_rows": 11,
+    "successful_migrations": 11,
+    "failed_migrations": 0,
+    "verification_failures": 0
+  },
+  "verification_errors": [],
+  "customers": [
+    {
+      "id": "atlantic_performance_oils_20250916",
+      "company_name": "Atlantic Performance Oils",
+      "recipient_names": [
+        "Arnie",
+        "Steve",
+        "Pares",
+        "and Brad"
+      ],
+      "email_addresses": [
+        "arnulfoc@atlanticoil.com",
+        "steve@atlanticoil.com",
+        "parest@atlanticoil.com",
+        "bradm@atlanticoil.com"
+      ],
+      "email_domain": "atlanticoil.com",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Atlantic Performance Oils.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Atlantic Performance Oils\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Atlantic Performance Oils.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.438915"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.438918",
+      "created_date": "2025-09-16T15:28:34.438919",
+      "migration_source": "Excel row 0",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "corporate_energy_australia_20250916",
+      "company_name": "Corporate Energy Australia",
+      "recipient_names": [
+        "Brent",
+        "Sharnie",
+        "Roy",
+        "Pam"
+      ],
+      "email_addresses": [
+        "brentb@ceag.com.au",
+        "invoices@ceag.com.au",
+        "royc@ceag.com.au",
+        "pamj@ceag.com.au"
+      ],
+      "email_domain": "ceag.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Corporate Energy Australia.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Corporate Energy Australia\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Corporate Energy Australia.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.439200"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.439202",
+      "created_date": "2025-09-16T15:28:34.439202",
+      "migration_source": "Excel row 1",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "fuchs_lubricants_20250916",
+      "company_name": "Fuchs Lubricants",
+      "recipient_names": [
+        "Rebecca",
+        "Robyn",
+        "and Edan"
+      ],
+      "email_addresses": [
+        "rebecca.cooper@fuchs.com",
+        "Edan.Miller@fuchs.com",
+        "robyn.reid@fuchs.com"
+      ],
+      "email_domain": "fuchs.com",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Fuchs Lubricants.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Fuchs Lubricants\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Fuchs Lubricants.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.439451"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.439453",
+      "created_date": "2025-09-16T15:28:34.439454",
+      "migration_source": "Excel row 2",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "global_lubricants_20250916",
+      "company_name": "Global Lubricants",
+      "recipient_names": [
+        "Kal"
+      ],
+      "email_addresses": [
+        "kalpeshp@peakoil.com.au"
+      ],
+      "email_domain": "peakoil.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Global Lubricants.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Global Lubricants\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Global Lubricants.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.439725"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.439727",
+      "created_date": "2025-09-16T15:28:34.439727",
+      "migration_source": "Excel row 3",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "gulf_western_oil_20250916",
+      "company_name": "Gulf Western Oil",
+      "recipient_names": [
+        "Rob",
+        "Ben",
+        "and Scott"
+      ],
+      "email_addresses": [
+        "Robert@gulfwestern.com.au",
+        "ben@gulfwestern.com.au",
+        "scott@gulfwestern.com.au"
+      ],
+      "email_domain": "gulfwestern.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Gulf Western Oil.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Gulf Western Oil\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Gulf Western Oil.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.443843"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.443846",
+      "created_date": "2025-09-16T15:28:34.443847",
+      "migration_source": "Excel row 4",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "harrison_manufacturing_company_20250916",
+      "company_name": "Harrison Manufacturing Company",
+      "recipient_names": [
+        "Terrence",
+        "Tomas",
+        "Purchasing Team"
+      ],
+      "email_addresses": [
+        "Terence.Farrelly@harrison.com.au",
+        "hmcpurchasing@harrison.com.au",
+        "tomas.kroupa@harrison.com.au"
+      ],
+      "email_domain": "harrison.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Harrison Manufacturing Company.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Harrison Manufacturing Company\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Harrison Manufacturing Company.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.444133"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.444135",
+      "created_date": "2025-09-16T15:28:34.444136",
+      "migration_source": "Excel row 5",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "hitec_oil_traders_20250916",
+      "company_name": "Hi-Tec Oil Traders",
+      "recipient_names": [
+        "Chantal",
+        "Martin"
+      ],
+      "email_addresses": [
+        "cdevroome@hi-tecoils.com.au",
+        "MRyland-Adair@hi-tecoils.com.au",
+        "Purchasing@hi-tecoils.com.au"
+      ],
+      "email_domain": "hi-tecoils.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Hi-Tec Oil Traders.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Hi-Tec Oil Traders\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Hi-Tec Oil Traders.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.444359"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.444360",
+      "created_date": "2025-09-16T15:28:34.444361",
+      "migration_source": "Excel row 6",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "lubealloy_specialised_lubricants_20250916",
+      "company_name": "LubeAlloy Specialised Lubricants",
+      "recipient_names": [
+        "Darren",
+        "Karryn"
+      ],
+      "email_addresses": [
+        "darren.garnon@lubealloy.com.au",
+        "admin@lubealloy.com.au"
+      ],
+      "email_domain": "lubealloy.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_LubeAlloy Specialised Lubricants.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\LubeAlloy Specialised Lubricants\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_LubeAlloy Specialised Lubricants.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.444601"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.444602",
+      "created_date": "2025-09-16T15:28:34.444603",
+      "migration_source": "Excel row 7",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "penrite_oil_20250916",
+      "company_name": "Penrite Oil",
+      "recipient_names": [
+        "David",
+        "Peter",
+        "John",
+        "and Steve"
+      ],
+      "email_addresses": [
+        "dpurser@penriteoil.com.au",
+        "pking@penriteoil.com.au",
+        "jfirth@penriteoil.com.au",
+        "smcfadden@penriteoil.com.au"
+      ],
+      "email_domain": "penriteoil.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Penrite Oil.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Penrite Oil\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Penrite Oil.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.444823"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.444825",
+      "created_date": "2025-09-16T15:28:34.444826",
+      "migration_source": "Excel row 8",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "prolube_lubricants_20250916",
+      "company_name": "Prolube Lubricants",
+      "recipient_names": [
+        "Les"
+      ],
+      "email_addresses": [
+        "les@prolube.com.au"
+      ],
+      "email_domain": "prolube.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Prolube Lubricants.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Prolube Lubricants\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Prolube Lubricants.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.445073"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.445075",
+      "created_date": "2025-09-16T15:28:34.445076",
+      "migration_source": "Excel row 9",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    },
+    {
+      "id": "trublu_oil_australia_20250916",
+      "company_name": "Tru-Blu Oil Australia",
+      "recipient_names": [
+        "Dilini",
+        "Murray",
+        "Wendy"
+      ],
+      "email_addresses": [
+        "Dilini.Siriwardena@trubluoil.com.au",
+        "Murray.Crawford@trubluoil.com.au",
+        "purchasing@trubluoil.com.au",
+        "wendy.g@trubluoil.com.au"
+      ],
+      "email_domain": "trubluoil.com.au",
+      "file_generation": {
+        "filename_pattern": "{month}_{file_body}",
+        "file_body": "_Pricing_Tru-Blu Oil Australia.pdf",
+        "file_path": "C:\\Users\\MarkAnderson\\Valorem\\Customer Hub - Documents\\Tru-Blu Oil Australia\\Pricing\\",
+        "month_prefix": "250901",
+        "current_filename": "250901_Pricing_Tru-Blu Oil Australia.pdf"
+      },
+      "pricing_details": {
+        "has_fx_change": true,
+        "fx_direction": null,
+        "has_price_change": true,
+        "price_direction": null
+      },
+      "verification_status": {
+        "domain_verified": true,
+        "file_path_verified": true,
+        "filename_verified": true,
+        "last_verification": "2025-09-16T15:28:34.445331"
+      },
+      "active": true,
+      "last_verified": "2025-09-16T15:28:34.445332",
+      "created_date": "2025-09-16T15:28:34.445333",
+      "migration_source": "Excel row 10",
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+    }
+  ],
+  "audit_log": [
+    {
+      "timestamp": "2025-09-16T15:35:54.097786",
+      "event_type": "verification_failure",
+      "severity": "critical",
+      "user": "MarkAnderson",
+      "action": "verification_failed",
+      "details": {
+        "email": "admin@wrongcompany.com",
+        "recipient": "Wrong Manager",
+        "attachment": "202509_Pricing_Test_Company.pdf",
+        "verification_results": [
+          {
+            "check_name": "final_customer_lookup",
+            "level": "critical",
+            "passed": false,
+            "message": "CRITICAL: Customer record not found",
+            "details": {
+              "email": "admin@wrongcompany.com"
+            }
+          }
+        ],
+        "message": "CRITICAL: Verification failed - email send blocked"
+      },
+      "customer_id": null,
+      "email_address": "admin@wrongcompany.com",
+      "recipient_name": "Wrong Manager",
+      "attachment_file": "202509_Pricing_Test_Company.pdf",
+      "verification_status": "FAILED",
+      "ip_address": null,
+      "session_id": "69918b52f2d006e3",
+      "success": false,
+      "error_message": "Verification checks failed",
+      "event_id": "08bf567c9eb1"
+    }
+  ],
+  "verification_rules": {
+    "domain_check_required": true,
+    "file_existence_check": true,
+    "filename_pattern_check": true,
+    "recipient_validation": true,
+    "prevent_cross_domain_sends": true,
+    "require_manual_approval_on_warnings": true
+  },
+  "schema_info": {
+    "required_fields": [
+      "company_name",
+      "email_addresses",
+      "email_domain",
+      "file_generation.file_path",
+      "file_generation.file_body"
+    ],
+    "validation_fields": [
+      "verification_status.domain_verified",
+      "verification_status.file_path_verified",
+      "verification_status.filename_verified"
+    ],
+    "critical_checks": [
+      "Domain verification prevents cross-customer data exposure",
+      "File existence check prevents failed email sends",
+      "Recipient validation ensures correct delivery"
+    ]
+  }
+}
