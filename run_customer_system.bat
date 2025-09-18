@@ -70,7 +70,7 @@ echo.
 echo IMPORTANT: Close Excel file before proceeding!
 echo.
 echo This will migrate customer data from CustomerDetails worksheet
-echo to customer_database_v2.json with comprehensive verification.
+echo to data/customer_database.json with comprehensive verification.
 echo.
 set /p confirm="Continue with migration? (y/n): "
 if /i "%confirm%"=="y" (
@@ -121,14 +121,14 @@ echo ===========================================================================
 echo CUSTOMER DATABASE CONTENTS
 echo ================================================================================
 echo.
-if exist customer_database_v2.json (
-    echo Database file: customer_database_v2.json
+if exist data/customer_database.json (
+    echo Database file: data/customer_database.json
     echo.
-    python -c "import json; data=json.load(open('customer_database_v2.json')); print(f'Version: {data[\"version\"]}'); print(f'Customers: {len(data[\"customers\"])}'); print(f'Created: {data[\"created_date\"]}'); print('\nCustomer List:'); [print(f'  - {c[\"company_name\"]} ({c[\"email_domain\"]})') for c in data['customers'] if c.get('active', True)]"
+    python -c "import json; data=json.load(open('data/customer_database.json')); print(f'Version: {data[\"version\"]}'); print(f'Customers: {len(data[\"customers\"])}'); print(f'Created: {data[\"created_date\"]}'); print('\nCustomer List:'); [print(f'  - {c[\"company_name\"]} ({c[\"email_domain\"]})') for c in data['customers'] if c.get('active', True)]"
     echo.
     echo Use Enhanced Dashboard v2.0 to manage customers.
 ) else (
-    echo ERROR: customer_database_v2.json not found.
+    echo ERROR: data/customer_database.json not found.
     echo Run migration first to create database.
 )
 echo.
@@ -151,7 +151,7 @@ if exist logs\ (
     echo Key log files:
     echo - migration_v2.log      : Excel to JSON migration details
     echo - verification_v2.log   : Customer verification attempts
-    echo - audit_log_v2.json     : Complete audit trail
+    echo - logs/audit_log.json   : Complete audit trail
     echo - audit_system.log      : System operation logs
     echo.
     set /p logfile="Enter log filename to view (or press Enter to continue): "
@@ -203,7 +203,7 @@ echo.
 echo Troubleshooting:
 echo 1. Ensure Python is installed and in PATH
 echo 2. Check that all required files exist
-echo 3. Verify customer_database_v2.json exists (run migration if needed)
+echo 3. Verify data/customer_database.json exists (run migration if needed)
 echo 4. Review log files in logs\ directory
 echo.
 echo If problems persist, check README_v2.md for detailed troubleshooting.

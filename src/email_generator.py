@@ -303,7 +303,7 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
         # Read customer data from JSON database
         database_file = os.path.join(
             os.path.dirname(os.path.dirname(__file__)),
-            "customer_database_v2.json"
+            "data/customer_database.json"
         )
 
         if progress_callback:

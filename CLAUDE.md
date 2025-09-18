@@ -73,12 +73,13 @@ pytest tests/ -v --cov=src
 ## Architecture
 
 ### Core Components
-- **dashboard.py**: Modern GUI application with two-column layout, debugging features, and bug fixes (CURRENT MAIN INTERFACE)
+- **dashboard.py**: Modern GUI application with customer management, two-column layout, debugging features, and comprehensive bug fixes (CURRENT MAIN INTERFACE)
 - **src/email_generator.py**: Core email generation module used by dashboard and CLI versions
 - **create_drafts_enhanced.py**: Enhanced CLI script with customizable templates (backup/alternative interface)
 - **email_templates.json**: Template configuration file containing multiple email templates, signature, and default values
 - **manage_templates.py**: Interactive template management utility for creating/editing email templates
-- **Python_CustomerPricing.xlsx**: Source Excel file containing customer data with headers on row 4 (0-indexed row 3)
+- **Python_CustomerPricing.xlsx**: Legacy Excel file for reference (system now uses JSON database)
+- **data/customer_database.json**: Primary customer database with comprehensive verification data
 - **monthly_drafts/**: Directory for storing monthly draft templates and configurations
 - **VBS launchers**: Double-click scripts for easy execution (run_dashboard.vbs, run_enhanced_price_sender.vbs)
 
@@ -90,12 +91,17 @@ pytest tests/ -v --cov=src
 - **generated_files/**: Python cache and build artifacts
 
 ### Data Flow
-1. Excel file is read using pandas with header on row 3 (0-indexed)
-2. Required columns: EmailAddresses, CustomerName, RecipientName, FilePath, FileName
-3. For each customer row:
+1. JSON database (data/customer_database.json) contains structured customer data
+2. Required fields: company_name, email_addresses, recipient_names, file_generation paths
+3. Multi-layer verification system validates:
+   - Domain verification for email addresses
+   - File path verification for attachments
+   - Recipient authorization checks
+4. For each customer record:
    - Creates Outlook draft with HTML body
-   - Attaches PDF from FilePath + FileName
+   - Attaches PDF from dynamic file naming (YYMMDD_*.pdf)
    - Sets CC to support@valorem.com.au and jasonn@valorem.com.au
+   - Comprehensive audit logging
    - Saves as draft (does not send)
 
 ### Key File Paths
@@ -103,6 +109,12 @@ pytest tests/ -v --cov=src
 - PDF attachments: Synced from SharePoint via OneDrive to local paths specified in Excel
 
 ## Dashboard Features (dashboard.py) - CURRENT MAIN INTERFACE
+
+### Enhanced Customer Management (v2.0)
+- **Customer Database Management**: Complete CRUD operations for customer records
+- **Multi-layer Verification**: Domain, file path, and recipient verification
+- **Audit Logging**: Comprehensive tracking of all system operations
+- **Excel-free Operation**: Pure JSON database system with migration tools
 
 ### User Interface
 - **Two-Column Layout**: 60% left (email content/preview), 40% right (controls)

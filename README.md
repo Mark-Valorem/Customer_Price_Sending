@@ -4,17 +4,19 @@ A modern Python automation system for creating Outlook email drafts with custome
 
 ## Features
 
-### 🎯 Modern GUI Dashboard (v0.3.0)
+### 🎯 Modern GUI Dashboard (v0.3.1)
 - **Two-Column Interface**: Intuitive design with draft editor and controls
-- **Live Preview**: Real-time email preview with sample customer data
+- **Customer Management**: Complete database management with CRUD operations
+- **Multi-layer Verification**: Domain, file path, and recipient verification
+- **Live Preview**: Real-time email preview with actual selected month/year
 - **Debug Mode**: Comprehensive debugging with timestamped console output
 - **Monthly Management**: Load, edit, and save drafts by month/year
-- **Bug Fixes**: Resolved duplicate signatures and variable resolution issues
+- **Critical Bug Fixes**: Resolved month/year consistency and file extraction issues
 
 ### 🔧 Core Automation
 - **Automated Email Draft Creation**: Creates Outlook drafts with customer-specific content
 - **Template Management**: Multiple customizable email templates with placeholders
-- **Excel Integration**: Reads customer data from Excel workbooks
+- **JSON Database**: Modern customer database with comprehensive verification data
 - **PDF Attachment Support**: Automatically attaches customer-specific price sheets
 - **Safety Features**: Creates drafts only (no automatic sending)
 
@@ -26,11 +28,16 @@ A modern Python automation system for creating Outlook email drafts with custome
    pip install -r requirements.txt
    ```
 
-2. Launch the modern dashboard:
+2. Launch the enhanced dashboard:
    ```bash
    python dashboard.py
    ```
    Or double-click: `run_dashboard.vbs`
+
+3. For customer database management:
+   ```bash
+   # Or double-click: run_customer_system.bat
+   ```
 
 ### Option 2: CLI Version (Alternative)
 ```bash
@@ -67,14 +74,15 @@ Or double-click: `run_enhanced_price_sender.vbs`
 ## Key Components
 
 ### Active Applications
-- **`dashboard.py`**: Modern GUI with two-column layout, debugging, and bug fixes ⭐ **MAIN INTERFACE**
+- **`dashboard.py`**: Modern GUI with customer management, verification system, and critical bug fixes ⭐ **MAIN INTERFACE**
 - **`create_drafts_enhanced.py`**: Enhanced CLI version (backup/alternative interface)
 - **`src/email_generator.py`**: Core email generation module (shared by both interfaces)
 - **`manage_templates.py`**: Template management utility
 
 ### Configuration & Data
 - **`email_templates.json`**: Customizable email templates with placeholders
-- **`Python_CustomerPricing.xlsx`**: Production customer data
+- **`data/customer_database.json`**: Primary customer database with verification data
+- **`Python_CustomerPricing.xlsx`**: Legacy Excel data (for reference/migration only)
 - **`monthly_drafts/`**: Monthly draft storage and configurations
 
 ### Archived Components
