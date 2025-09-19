@@ -1,10 +1,16 @@
-# Customer Price Sheet Automation v3.0
+# Customer Price Sheet Automation v3.0.1
 
-A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 3.0 features direct launch, enhanced verification console, user-specific signatures, and company branding.
+A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 3.0.1 includes critical verification system fixes and enhanced stability.
 
-## 🚀 What's New in Version 3.0
+## 🚀 What's New in Version 3.0.1
 
-### Major Enhancements
+### Critical Fixes
+- **Verification System Fix**: Resolved "'str' object has no attribute 'get'" error in customer verification
+- **Data Structure Compatibility**: Fixed file_generation handling for JSON database format
+- **Enhanced Error Handling**: Improved compatibility between dictionary and list data structures
+- **Archive Cleanup**: Moved outdated launcher files to Archive for better organization
+
+### Major Features from v3.0
 - **Direct Launch**: No terminal selection - application starts immediately
 - **User Signatures**: Select between Jason Najm and Mark Anderson with HTML signatures
 - **Company Logo**: Valorem branding in the dashboard header
@@ -113,8 +119,9 @@ python create_drafts_enhanced.py
 
 ## Version Information
 
-- **Current Version**: 0.3.0
-- **Major Features**: Dashboard GUI, bug fixes, comprehensive debugging
+- **Current Version**: 3.0.1
+- **Major Features**: Verification system fixes, dashboard GUI, customer management
+- **Recent Fix**: Resolved customer verification error with JSON database compatibility
 - **Compatibility**: Windows (requires Microsoft Outlook)
 - **Python Support**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 - **HTML/CSS**: Template formatting

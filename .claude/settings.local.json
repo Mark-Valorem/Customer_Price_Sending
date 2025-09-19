@@ -23,7 +23,10 @@
       "Bash(git mv:*)",
       "Bash(tree:*)",
       "Bash(where python)",
-      "Bash(where pythonw)"
+      "Bash(where pythonw)",
+      "Bash(del \"C:\\Users\\MarkAnderson\\Valorem\\Knowledge Hub - Documents\\Pricing\\Customer Price Lists\\Price Sheet Sending_Python\\test_verification_fix.py\")",
+      "Bash(del test_verification_fix.py)",
+      "Bash(./scripts/bump_version.bat patch)"
     ],
     "deny": [],
     "ask": []

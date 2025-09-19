@@ -44,13 +44,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.438915"
+        "last_verification": "2025-09-16T15:28:34.438915",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:16.389130"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.438918",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.438919",
       "migration_source": "Excel row 0",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:16.389189"
     },
     {
       "id": "corporate_energy_australia_20250916",
@@ -85,13 +89,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.439200"
+        "last_verification": "2025-09-16T15:28:34.439200",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:16.491101"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.439202",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.439202",
       "migration_source": "Excel row 1",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:16.491160"
     },
     {
       "id": "fuchs_lubricants_20250916",
@@ -124,13 +132,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.439451"
+        "last_verification": "2025-09-16T15:28:34.439451",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:16.626140"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.439453",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.439454",
       "migration_source": "Excel row 2",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:16.626199"
     },
     {
       "id": "global_lubricants_20250916",
@@ -159,13 +171,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.439725"
+        "last_verification": "2025-09-16T15:28:34.439725",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:16.826376"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.439727",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.439727",
       "migration_source": "Excel row 3",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:16.826454"
     },
     {
       "id": "gulf_western_oil_20250916",
@@ -198,13 +214,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.443843"
+        "last_verification": "2025-09-16T15:28:34.443843",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:16.984904"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.443846",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.443847",
       "migration_source": "Excel row 4",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:16.984967"
     },
     {
       "id": "harrison_manufacturing_company_20250916",
@@ -237,13 +257,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.444133"
+        "last_verification": "2025-09-16T15:28:34.444133",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:17.159685"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.444135",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.444136",
       "migration_source": "Excel row 5",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:17.159748"
     },
     {
       "id": "hitec_oil_traders_20250916",
@@ -275,13 +299,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.444359"
+        "last_verification": "2025-09-16T15:28:34.444359",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:17.328790"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.444360",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.444361",
       "migration_source": "Excel row 6",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:17.328867"
     },
     {
       "id": "lubealloy_specialised_lubricants_20250916",
@@ -312,13 +340,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.444601"
+        "last_verification": "2025-09-16T15:28:34.444601",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:17.487734"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.444602",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.444603",
       "migration_source": "Excel row 7",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:17.487791"
     },
     {
       "id": "penrite_oil_20250916",
@@ -353,13 +385,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.444823"
+        "last_verification": "2025-09-16T15:28:34.444823",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:17.668806"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.444825",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.444826",
       "migration_source": "Excel row 8",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:17.668866"
     },
     {
       "id": "prolube_lubricants_20250916",
@@ -388,13 +424,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.445073"
+        "last_verification": "2025-09-16T15:28:34.445073",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:17.844222"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.445075",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.445076",
       "migration_source": "Excel row 9",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:17.844284"
     },
     {
       "id": "trublu_oil_australia_20250916",
@@ -428,13 +468,17 @@
         "domain_verified": true,
         "file_path_verified": true,
         "filename_verified": true,
-        "last_verification": "2025-09-16T15:28:34.445331"
+        "last_verification": "2025-09-16T15:28:34.445331",
+        "recipients_verified": true,
+        "file_paths_verified": true,
+        "last_check": "2025-09-19T22:10:18.053450"
       },
       "active": true,
-      "last_verified": "2025-09-16T15:28:34.445332",
+      "last_verified": "2025-09-19",
       "created_date": "2025-09-16T15:28:34.445333",
       "migration_source": "Excel row 10",
-      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16"
+      "notes": "Migrated from Excel CustomerDetails worksheet on 2025-09-16",
+      "updated_at": "2025-09-19T22:10:18.053523"
     }
   ],
   "audit_log": [

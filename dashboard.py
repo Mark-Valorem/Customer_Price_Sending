@@ -255,7 +255,13 @@ class CustomerManagementPanel:
                     if verification_result['overall_status'] == 'passed':
                         self.add_console_message(f"✓ Domain verified: {customer['email_domain']}", 'success')
                         self.add_console_message(f"✓ Recipients verified: {len(customer['email_addresses'])} emails", 'success')
-                        self.add_console_message(f"✓ File paths verified: {len(customer['file_generation'])} files", 'success')
+                        # Handle file_generation as either dict or list
+                        file_gen = customer.get('file_generation', {})
+                        if isinstance(file_gen, dict):
+                            file_count = 1 if file_gen.get('file_path') else 0
+                        else:
+                            file_count = len(file_gen)
+                        self.add_console_message(f"✓ File paths verified: {file_count} file{'s' if file_count != 1 else ''}", 'success')
                         self.add_console_message("STATUS: PASSED", 'success')
                         results['passed'].append(company_name)
                     elif verification_result['overall_status'] == 'warning':

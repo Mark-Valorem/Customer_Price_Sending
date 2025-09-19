@@ -3,7 +3,13 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Purpose
-This codebase automates the creation of Outlook email drafts for sending monthly customer price sheets. Version 3.0 introduces streamlined operation with direct launch, enhanced verification, and user-specific signatures.
+This codebase automates the creation of Outlook email drafts for sending monthly customer price sheets. Version 3.0.1 includes critical verification system fixes and enhanced stability, with streamlined operation featuring direct launch, enhanced verification, and user-specific signatures.
+
+## Recent Critical Fixes (v3.0.1)
+- **Verification System Error Fix**: Resolved "'str' object has no attribute 'get'" error in customer verification
+- **Data Structure Compatibility**: Fixed handling of file_generation field as dictionary vs list format
+- **Archive Cleanup**: Moved outdated launcher files (run_customer_system.bat, run_dashboard_v3.vbs) to Archive/legacy_launchers/
+- **Enhanced Error Handling**: Improved compatibility between different data structure formats in verification system
 
 ## Key Commands
 
@@ -175,6 +181,7 @@ This project follows Python best practices with clean organization:
 │   └── bump_version.sh        # Version management (Unix)
 ├── Archive/                    # Organized archived files
 │   ├── legacy_cli_scripts/    # Original CLI scripts
+│   ├── legacy_launchers/      # Outdated launcher files (v3.0.1)
 │   ├── development_tests/     # Development test files
 │   ├── unused_web_interface/  # Placeholder web files
 │   ├── sandbox_data/          # Test data files

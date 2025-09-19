@@ -525,10 +525,15 @@ class MultiLayerVerificationSystem:
             issues.append({'message': 'No email addresses configured'})
 
         # Check file paths
-        file_generation = customer.get('file_generation', [])
+        file_generation = customer.get('file_generation', {})
         if not file_generation:
             issues.append({'message': 'No file generation paths configured'})
-        else:
+        elif isinstance(file_generation, dict):
+            # Handle file_generation as a dictionary (current format)
+            if not file_generation.get('file_path'):
+                issues.append({'message': 'Missing file path in file generation config'})
+        elif isinstance(file_generation, list):
+            # Handle file_generation as a list (legacy format)
             for file_info in file_generation:
                 if not file_info.get('file_path'):
                     issues.append({'message': 'Missing file path in file generation config'})
@@ -544,7 +549,11 @@ class MultiLayerVerificationSystem:
         # Update verification status
         customer['verification_status']['domain_verified'] = (overall_status != 'failed')
         customer['verification_status']['recipients_verified'] = bool(customer.get('email_addresses'))
-        customer['verification_status']['file_paths_verified'] = bool(file_generation)
+        # Check if file_generation has valid path
+        if isinstance(file_generation, dict):
+            customer['verification_status']['file_paths_verified'] = bool(file_generation.get('file_path'))
+        else:
+            customer['verification_status']['file_paths_verified'] = bool(file_generation)
         customer['verification_status']['last_check'] = datetime.now().isoformat()
         customer['last_verified'] = datetime.now().strftime('%Y-%m-%d')
 
