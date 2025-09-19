@@ -1,27 +1,17 @@
-# Customer Price Sheet Automation v3.0
+# Customer Price Sheet Automation
 
-A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 3.0 features direct launch, enhanced verification console, user-specific signatures, and company branding.
-
-## 🚀 What's New in Version 3.0
-
-### Major Enhancements
-- **Direct Launch**: No terminal selection - application starts immediately
-- **User Signatures**: Select between Jason Najm and Mark Anderson with HTML signatures
-- **Company Logo**: Valorem branding in the dashboard header
-- **Enhanced Verification**: 50/50 split layout with real-time progress for ALL customers
-- **Simplified Templates**: Single default template with auto-save functionality
-- **Playwright Testing**: Automated UI testing for quality assurance
+A modern Python automation system for creating Outlook email drafts with customer price sheets. Features a user-friendly GUI dashboard with debugging capabilities, plus CLI alternatives for advanced users.
 
 ## Features
 
-### 🎯 Modern GUI Dashboard (v3.0)
-- **Direct Launch Interface**: No terminal windows or selection dialogs
-- **Customer Management**: Complete database with 50/50 verification console
-- **Real-time Verification**: Test ALL customers with comprehensive reporting
-- **User Selection**: Choose sender with automatic signature application
-- **Live Preview**: Real-time email preview with selected user's signature
-- **Company Branding**: Valorem logo integration
-- **Auto-Save Templates**: Changes saved automatically as you type
+### 🎯 Modern GUI Dashboard (v0.3.1)
+- **Two-Column Interface**: Intuitive design with draft editor and controls
+- **Customer Management**: Complete database management with CRUD operations
+- **Multi-layer Verification**: Domain, file path, and recipient verification
+- **Live Preview**: Real-time email preview with actual selected month/year
+- **Debug Mode**: Comprehensive debugging with timestamped console output
+- **Monthly Management**: Load, edit, and save drafts by month/year
+- **Critical Bug Fixes**: Resolved month/year consistency and file extraction issues
 
 ### 🔧 Core Automation
 - **Automated Email Draft Creation**: Creates Outlook drafts with customer-specific content
@@ -32,32 +22,28 @@ A streamlined Python automation system for creating Outlook email drafts with cu
 
 ## Quick Start
 
-### Installation
-```bash
-pip install -r requirements.txt
-```
+### Option 1: GUI Dashboard (Recommended)
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Running the Application
+2. Launch the enhanced dashboard:
+   ```bash
+   python dashboard.py
+   ```
+   Or double-click: `run_dashboard.vbs`
 
-#### Option 1: Direct Launch (Recommended)
-Double-click `run_dashboard.vbs` - the application launches immediately without any dialogs.
+3. For customer database management:
+   ```bash
+   # Or double-click: run_customer_system.bat
+   ```
 
-#### Option 2: Command Line
-```bash
-python dashboard.py
-```
-
-#### Option 3: CLI Version (Legacy)
+### Option 2: CLI Version (Alternative)
 ```bash
 python create_drafts_enhanced.py
 ```
-
-### First Time Setup
-1. Ensure HTML signature files are in `data/` folder:
-   - `Mark_Anderson_231123.html`
-   - `Jason_Najm_250427.html`
-2. Ensure `valorem_logo.png` is in the root directory
-3. Configure customer database in the Customer Management tab
+Or double-click: `run_enhanced_price_sender.vbs`
 
 ## Project Structure
 

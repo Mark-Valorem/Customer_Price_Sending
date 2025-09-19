@@ -20,7 +20,8 @@
       "Bash(robocopy:*)",
       "Bash(scriptsbump_version.bat patch)",
       "Bash(scripts/bump_version.bat patch)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

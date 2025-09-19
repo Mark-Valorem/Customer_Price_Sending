@@ -3,20 +3,21 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Purpose
-This codebase automates the creation of Outlook email drafts for sending monthly customer price sheets. Version 3.0 introduces streamlined operation with direct launch, enhanced verification, and user-specific signatures.
+This codebase automates the creation of Outlook email drafts for sending monthly customer price sheets. It reads customer data from an Excel workbook and creates personalized drafts with PDF attachments.
 
 ## Key Commands
 
 ### Running the application
 ```bash
-# GUI Dashboard v3.0 (Direct Launch)
+# Modern GUI Dashboard (RECOMMENDED)
 python dashboard.py
 # Or double-click: run_dashboard.vbs
 
-# Enhanced CLI version (backup interface)
+# Enhanced CLI version (alternative interface)
 python create_drafts_enhanced.py
+# Or double-click: run_enhanced_price_sender.vbs
 
-# Template management utility (for CLI version)
+# Template management utility
 python manage_templates.py
 ```
 
@@ -107,37 +108,32 @@ pytest tests/ -v --cov=src
 - Excel workbook: `C:\Users\MarkAnderson\Valorem\Knowledge Hub - Documents\Pricing\Customer Price Lists\Price Sheet Sending_Python\Python_CustomerPricing.xlsx`
 - PDF attachments: Synced from SharePoint via OneDrive to local paths specified in Excel
 
-## Dashboard Features (dashboard.py) - VERSION 3.0
+## Dashboard Features (dashboard.py) - CURRENT MAIN INTERFACE
 
-### Major Changes in v3.0
-- **Direct Launch**: No terminal/console selection - application starts immediately
-- **Simplified Draft Management**: Single default template with auto-save, no load/save buttons
-- **Enhanced Verification Console**: 50/50 split layout with real-time progress
-- **User Signatures**: Dropdown selection for Jason Najm and Mark Anderson with HTML signatures
-- **Company Logo**: Valorem logo displayed in top-left corner
-- **Playwright Testing**: Automated UI tests for quality assurance
-
-### Enhanced Customer Management
-- **Customer Database**: Complete CRUD operations in left panel
-- **Verification Console**: Real-time verification output in right panel (50/50 split)
-- **Verify All Button**: Single-click verification of entire customer database
-- **Color-Coded Output**: Visual feedback with success (green), warning (yellow), error (red)
-- **Progress Tracking**: Real-time progress bar and summary statistics
+### Enhanced Customer Management (v2.0)
+- **Customer Database Management**: Complete CRUD operations for customer records
+- **Multi-layer Verification**: Domain, file path, and recipient verification
+- **Audit Logging**: Comprehensive tracking of all system operations
+- **Excel-free Operation**: Pure JSON database system with migration tools
 
 ### User Interface
-- **Header Bar**: Logo, title, user selection dropdown, debug toggle
-- **Tab Layout**: Email Generation, Customer Management, Settings
-- **Email Tab**: Template editor (left 60%), controls/preview (right 40%)
-- **Customer Tab**: Customer list (left 50%), verification console (right 50%)
-- **Auto-Save**: Template changes are saved automatically
+- **Two-Column Layout**: 60% left (email content/preview), 40% right (controls)
+- **Responsive Design**: Columns stack on narrow screens
+- **Minimum Heights**: Draft area (400px), Preview (300px), Debug panel (150px)
 
 ### Key Features
-- **Email Template Editor**: Simple text editor with variable support
-- **Live Preview**: Real-time preview with selected user's signature
-- **User Selection**: Switch between Jason Najm and Mark Anderson signatures
-- **Debug Mode**: Optional debug console for troubleshooting
-- **Status Bar**: Real-time status updates
-- **Progress Tracking**: Visual progress during email generation
+- **Email Draft Editor**: Full-featured text editor with syntax highlighting for templates
+- **Live Preview**: Real-time preview with sample customer data and variable resolution
+- **Monthly Management**: Load/save/edit drafts by month and year
+- **Template Variables**: Automatic resolution of {current_month}, {previous_month}, etc.
+- **Debug Mode**: Comprehensive debugging with timestamped console output
+- **Error Handling**: Detailed error messages with troubleshooting steps
+- **Progress Tracking**: Real-time progress bar during email generation
+
+### Bug Fixes (v0.3.0)
+- **Fixed Duplicate Signatures**: Automatic signature stripping prevents duplication
+- **Fixed Variable Resolution**: {current_month} and other variables now resolve correctly
+- **Enhanced Error Handling**: Better error reporting with actionable information
 
 ## Enhanced Features (create_drafts_enhanced.py) - CLI Alternative
 - **Template Selection**: Choose from multiple pre-defined email templates (default, price_increase, no_change, promotional)

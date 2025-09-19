@@ -3,8 +3,6 @@ pandas>=1.5.0
 pywin32>=306
 openpyxl>=3.0.0
 python-dateutil>=2.8.0
-Pillow>=10.0.0
-playwright>=1.40.0
 
 # Development and versioning dependencies
 # Install with: pip install -r requirements.txt
