@@ -21,7 +21,9 @@
       "Bash(scriptsbump_version.bat patch)",
       "Bash(scripts/bump_version.bat patch)",
       "Bash(git mv:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(where python)",
+      "Bash(where pythonw)"
     ],
     "deny": [],
     "ask": []

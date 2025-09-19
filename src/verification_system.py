@@ -58,7 +58,7 @@ class CustomerVerificationReport:
 class CustomerDatabase:
     """Handles loading and querying the JSON customer database"""
 
-    def __init__(self, database_file: str = "customer_database_v2.json"):
+    def __init__(self, database_file: str = "data/customer_database.json"):
         self.database_file = database_file
         self.data = None
         self.load_database()
@@ -95,6 +95,67 @@ class CustomerDatabase:
         """Check if email is in the authorized list for this customer"""
         return email.lower() in [addr.lower() for addr in customer_record['email_addresses']]
 
+    def get_all_customers(self) -> List[Dict[str, Any]]:
+        """Get all customers from the database"""
+        return self.data.get('customers', [])
+
+    def add_customer(self, customer_data: Dict[str, Any]) -> str:
+        """Add a new customer to the database"""
+        # Generate new ID
+        import uuid
+        customer_id = str(uuid.uuid4())[:8].upper()
+
+        # Add required fields
+        customer_data['id'] = customer_id
+        customer_data['created_at'] = datetime.now().isoformat()
+        customer_data['last_verified'] = 'Never'
+        customer_data['verification_status'] = {
+            'domain_verified': False,
+            'recipients_verified': False,
+            'file_paths_verified': False,
+            'last_check': None
+        }
+
+        # Add to database
+        if 'customers' not in self.data:
+            self.data['customers'] = []
+        self.data['customers'].append(customer_data)
+
+        # Save to file
+        self.save_database()
+        return customer_id
+
+    def update_customer(self, customer_id: str, customer_data: Dict[str, Any]) -> bool:
+        """Update an existing customer in the database"""
+        for i, customer in enumerate(self.data['customers']):
+            if customer['id'] == customer_id:
+                # Preserve ID and metadata
+                customer_data['id'] = customer_id
+                customer_data['updated_at'] = datetime.now().isoformat()
+                self.data['customers'][i] = customer_data
+                self.save_database()
+                return True
+        return False
+
+    def delete_customer(self, customer_id: str) -> bool:
+        """Delete a customer from the database"""
+        for i, customer in enumerate(self.data['customers']):
+            if customer['id'] == customer_id:
+                del self.data['customers'][i]
+                self.save_database()
+                return True
+        return False
+
+    def save_database(self) -> None:
+        """Save the database back to JSON file"""
+        try:
+            with open(self.database_file, 'w', encoding='utf-8') as f:
+                json.dump(self.data, f, indent=2, ensure_ascii=False)
+            logging.info(f"Saved customer database with {len(self.data['customers'])} customers")
+        except Exception as e:
+            logging.error(f"Failed to save customer database: {str(e)}")
+            raise
+
 
 class MultiLayerVerificationSystem:
     """
@@ -102,7 +163,7 @@ class MultiLayerVerificationSystem:
     CRITICAL: This system prevents cross-customer data exposure
     """
 
-    def __init__(self, database_file: str = "customer_database_v2.json"):
+    def __init__(self, database_file: str = "data/customer_database.json"):
         self.database = CustomerDatabase(database_file)
         self.verification_rules = self.database.data.get('verification_rules', {})
 
