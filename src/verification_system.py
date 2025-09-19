@@ -501,6 +501,61 @@ class MultiLayerVerificationSystem:
             timestamp=datetime.now()
         )
 
+    def verify_customer(self, customer_id: str) -> Dict[str, Any]:
+        """
+        Verify a customer by ID
+        Returns verification status and issues
+        """
+        customer = self.database.get_customer_by_id(customer_id)
+
+        if not customer:
+            return {
+                'overall_status': 'failed',
+                'issues': [{'message': f'Customer ID {customer_id} not found'}]
+            }
+
+        issues = []
+
+        # Check domain verification
+        if not customer.get('verification_status', {}).get('domain_verified', False):
+            issues.append({'message': f"Domain not verified: {customer.get('email_domain', 'unknown')}"})
+
+        # Check email addresses
+        if not customer.get('email_addresses'):
+            issues.append({'message': 'No email addresses configured'})
+
+        # Check file paths
+        file_generation = customer.get('file_generation', [])
+        if not file_generation:
+            issues.append({'message': 'No file generation paths configured'})
+        else:
+            for file_info in file_generation:
+                if not file_info.get('file_path'):
+                    issues.append({'message': 'Missing file path in file generation config'})
+
+        # Determine overall status
+        if not issues:
+            overall_status = 'passed'
+        elif any('No email addresses' in issue['message'] or 'not found' in issue['message'] for issue in issues):
+            overall_status = 'failed'
+        else:
+            overall_status = 'warning'
+
+        # Update verification status
+        customer['verification_status']['domain_verified'] = (overall_status != 'failed')
+        customer['verification_status']['recipients_verified'] = bool(customer.get('email_addresses'))
+        customer['verification_status']['file_paths_verified'] = bool(file_generation)
+        customer['verification_status']['last_check'] = datetime.now().isoformat()
+        customer['last_verified'] = datetime.now().strftime('%Y-%m-%d')
+
+        # Save updated status
+        self.database.update_customer(customer_id, customer)
+
+        return {
+            'overall_status': overall_status,
+            'issues': issues
+        }
+
     def verify_email_send(self, email: str, recipient_name: str, attachment_file: str) -> CustomerVerificationReport:
         """
         Complete verification process for email send

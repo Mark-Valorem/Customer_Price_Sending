@@ -56,7 +56,18 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
 
         # Get recipient name
         recipient_names = customer.get('recipient_names', [])
-        recipient_name = recipient_names[0] if recipient_names else 'Team'
+        if isinstance(recipient_names, list) and recipient_names:
+            # Handle case where names are in a single string or multiple strings
+            if len(recipient_names) == 1 and ',' in recipient_names[0]:
+                # Single string with comma-separated names
+                recipient_name = recipient_names[0]
+            elif len(recipient_names) > 0:
+                # Multiple individual names or single name
+                recipient_name = recipient_names[0]
+            else:
+                recipient_name = 'Team'
+        else:
+            recipient_name = 'Team'
 
         # Get previous month
         months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -88,18 +99,36 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
         mail.HTMLBody = html_body
 
         # Add attachments if available
-        for file_info in customer.get('file_generation', []):
-            if file_info.get('file_path') and os.path.exists(file_info['file_path']):
-                # Find latest PDF file matching pattern
-                dir_path = os.path.dirname(file_info['file_path'])
-                file_pattern = f"*{customer['company_name']}*.pdf"
-
+        file_generation = customer.get('file_generation', {})
+        if isinstance(file_generation, dict):
+            # Handle single file_generation as dict
+            file_path = file_generation.get('file_path', '')
+            if file_path and os.path.exists(file_path):
+                # Look for PDF files in the directory
                 import glob
-                pdf_files = glob.glob(os.path.join(dir_path, file_pattern))
+                pdf_pattern = os.path.join(file_path, '*.pdf')
+                pdf_files = glob.glob(pdf_pattern)
+
+                # Try to find the most recent PDF matching the company name
                 if pdf_files:
-                    # Get most recent file
-                    latest_pdf = max(pdf_files, key=os.path.getmtime)
-                    mail.Attachments.Add(latest_pdf)
+                    company_pdfs = [f for f in pdf_files if customer['company_name'].lower().replace(' ', '_') in f.lower()]
+                    if company_pdfs:
+                        latest_pdf = max(company_pdfs, key=os.path.getmtime)
+                        mail.Attachments.Add(latest_pdf)
+                    elif pdf_files:  # Fall back to any PDF if no company-specific found
+                        latest_pdf = max(pdf_files, key=os.path.getmtime)
+                        mail.Attachments.Add(latest_pdf)
+        elif isinstance(file_generation, list):
+            # Handle multiple file_generation entries as list
+            for file_info in file_generation:
+                file_path = file_info.get('file_path', '')
+                if file_path and os.path.exists(file_path):
+                    import glob
+                    pdf_pattern = os.path.join(file_path, '*.pdf')
+                    pdf_files = glob.glob(pdf_pattern)
+                    if pdf_files:
+                        latest_pdf = max(pdf_files, key=os.path.getmtime)
+                        mail.Attachments.Add(latest_pdf)
 
         # Save as draft
         mail.Save()
