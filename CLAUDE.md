@@ -1,9 +1,80 @@
 # CLAUDE.md
 
+**version: v4.0.0**
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## .agent Documentation System
+
+This project uses a comprehensive `.agent/` documentation structure for AI-optimized context management.
+
+### AI Agent Rules
+
+**CRITICAL - Read these rules before every session:**
+
+1. **Always read .agent/README.md first** - Start every task by reading the documentation index to understand the current system state
+
+2. **Reference system docs before planning** - Check `.agent/system/` for architecture, database schema, and tech stack details before proposing changes
+
+3. **Follow SOPs for standard tasks** - Use `.agent/sops/` procedures for:
+   - Adding features → `.agent/sops/adding-feature.md`
+   - Running tests → `.agent/sops/running-tests.md`
+   - Database changes → `.agent/sops/database-changes.md`
+   - Deployment → `.agent/sops/deployment.md`
+
+4. **Update task docs after implementation** - After completing features, create task records in `.agent/tasks/` or use `/update-doc` command
+
+5. **Generate SOPs when correcting mistakes** - If you fix a recurring problem or establish a new pattern, create an SOP for future reference
+
+6. **Use semantic versioning** - All documentation files include version numbers (v1.0.0 format). Increment appropriately when updating
+
+7. **Maintain cross-references** - Link related documentation to help navigate the system
+
+8. **Archive unused files** - Move deprecated/unused files to `Archive/` with proper categorization
+
+### Documentation Structure Quick Reference
+
+```
+.agent/
+├── README.md              # START HERE - Documentation index
+├── tasks/                # Feature implementation records
+├── system/               # System architecture and technical docs
+│   ├── architecture.md       # System design and data flow
+│   ├── database-schema.md    # JSON database structure
+│   ├── tech-stack.md        # Technologies and dependencies
+│   └── api-endpoints.md     # Module interfaces and COM API
+└── sops/                 # Standard Operating Procedures
+    ├── adding-feature.md     # Feature development workflow
+    ├── running-tests.md      # Testing procedures
+    ├── database-changes.md   # Database modification workflow
+    └── deployment.md         # Distribution and updates
+
+.claude/commands/
+└── update-doc.md         # Automation command for doc maintenance
+```
+
+### When to Read What
+
+| Task | Read First |
+|------|-----------|
+| Starting any task | `.agent/README.md` |
+| Adding new feature | `.agent/sops/adding-feature.md` + `.agent/system/architecture.md` |
+| Modifying database | `.agent/sops/database-changes.md` + `.agent/system/database-schema.md` |
+| Running tests | `.agent/sops/running-tests.md` |
+| Understanding system | `.agent/system/architecture.md` + `.agent/system/tech-stack.md` |
+| Deploying updates | `.agent/sops/deployment.md` |
+
+---
+
 ## Purpose
-This codebase automates the creation of Outlook email drafts for sending monthly customer price sheets. Version 3.0.1 includes critical verification system fixes and enhanced stability, with streamlined operation featuring direct launch, enhanced verification, and user-specific signatures.
+This codebase automates the creation of Outlook email drafts for sending monthly customer price sheets. Version 4.0.0 introduces comprehensive AI-optimized documentation system for enhanced development workflows, with streamlined operation featuring direct launch, enhanced verification, and user-specific signatures.
+
+## What's New in Version 4.0.0
+- **Comprehensive .agent Documentation**: AI-optimized context management system
+- **Standard Operating Procedures**: Detailed SOPs for all common development tasks
+- **System Architecture Documentation**: Complete technical documentation for all components
+- **Automated Documentation Maintenance**: `/update-doc` command for documentation hygiene
+- **Version Tracking**: All documentation includes semantic versioning
 
 ## Recent Critical Fixes (v3.0.1)
 - **Verification System Error Fix**: Resolved "'str' object has no attribute 'get'" error in customer verification

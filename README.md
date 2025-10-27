@@ -1,8 +1,17 @@
-# Customer Price Sheet Automation v3.0.1
+# Customer Price Sheet Automation v4.0.0
 
-A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 3.0.1 includes critical verification system fixes and enhanced stability.
+A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 4.0.0 introduces comprehensive AI-optimized documentation and enhanced development workflows.
 
-## 🚀 What's New in Version 3.0.1
+## 🚀 What's New in Version 4.0.0
+
+### Major Documentation Overhaul
+- **.agent Documentation System**: AI-optimized context management for enhanced development
+- **Comprehensive SOPs**: Standard Operating Procedures for all common tasks
+- **System Architecture Docs**: Detailed technical documentation for codebase understanding
+- **Automated Documentation Updates**: Commands for maintaining documentation hygiene
+- **Version Tracking**: All documentation includes semantic versioning
+
+### Previous Updates (v3.0.1)
 
 ### Critical Fixes
 - **Verification System Fix**: Resolved "'str' object has no attribute 'get'" error in customer verification
@@ -119,7 +128,7 @@ python create_drafts_enhanced.py
 
 ## Version Information
 
-- **Current Version**: 3.0.1
+- **Current Version**: 4.0.0
 - **Major Features**: Verification system fixes, dashboard GUI, customer management
 - **Recent Fix**: Resolved customer verification error with JSON database compatibility
 - **Compatibility**: Windows (requires Microsoft Outlook)
