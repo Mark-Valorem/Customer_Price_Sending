@@ -1,17 +1,25 @@
-# Customer Price Sheet Automation v4.0.0
+# Customer Price Sheet Automation v4.0.1
 
-A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 4.0.0 introduces comprehensive AI-optimized documentation and enhanced development workflows.
+A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 4.0.1 includes bug fixes for CC emails, recipient names, and font styling.
 
-## 🚀 What's New in Version 4.0.0
+## 🚀 What's New in Version 4.0.1
 
-### Major Documentation Overhaul
+### Bug Fixes
+- **CC Emails Now Configurable**: Settings tab now actually saves and uses CC email addresses
+- **All Recipient Names**: Email greetings now include ALL recipient names, not just the first one
+- **Font Styling Fixed**: Emails now use Aptos 11pt instead of defaulting to Times New Roman 12pt
+- **Settings Persistence**: CC email configuration saved to `config/app_settings.json`
+
+### Previous Major Updates (v4.0.0)
+
+#### Documentation Overhaul
 - **.agent Documentation System**: AI-optimized context management for enhanced development
 - **Comprehensive SOPs**: Standard Operating Procedures for all common tasks
 - **System Architecture Docs**: Detailed technical documentation for codebase understanding
 - **Automated Documentation Updates**: Commands for maintaining documentation hygiene
 - **Version Tracking**: All documentation includes semantic versioning
 
-### Previous Updates (v3.0.1)
+### Previous Bug Fixes (v3.0.1)
 
 ### Critical Fixes
 - **Verification System Fix**: Resolved "'str' object has no attribute 'get'" error in customer verification
@@ -128,7 +136,7 @@ python create_drafts_enhanced.py
 
 ## Version Information
 
-- **Current Version**: 4.0.0
+- **Current Version**: 4.0.1
 - **Major Features**: Verification system fixes, dashboard GUI, customer management
 - **Recent Fix**: Resolved customer verification error with JSON database compatibility
 - **Compatibility**: Windows (requires Microsoft Outlook)

@@ -5,6 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.1] - 2025-10-27
+
+### Fixed
+- CC emails now configurable via Settings tab instead of hardcoded values
+- Settings tab now actually saves and loads CC email configuration
+- Email greetings now include ALL recipient names, not just the first name (e.g., "Hi John and Jane and Bob" instead of just "Hi John")
+- Email font changed from Times New Roman 12pt to Aptos 11pt as requested
+- Settings persistence via `config/app_settings.json` configuration file
+
+### Changed
+- Dashboard Settings tab now functional with save/load capabilities
+- Email generator accepts CC emails as parameter instead of hardcoded
+- Recipient name handling simplified to join all names with "and"
+
+## [4.0.0] - 2025-10-26
+
+### Added
+- Comprehensive .agent documentation system for AI-optimized context management
+- Standard Operating Procedures (SOPs) for common development tasks
+- System architecture documentation with detailed component diagrams
+- Database schema documentation with complete field reference
+- Tech stack documentation with all dependencies and configurations
+- API/Interface documentation for internal modules and COM integration
+- Automated documentation maintenance via `/update-doc` command
+- Version tracking for all documentation files
+
+### Changed
+- Updated CLAUDE.md with .agent documentation system rules
+- Enhanced development workflow with comprehensive SOPs
+
+## [3.0.1] - 2025-10-22
+
+### Fixed
+- Resolved "'str' object has no attribute 'get'" error in customer verification
+- Fixed file_generation field handling for JSON database format compatibility
+- Improved error handling for different data structure formats
+
+### Changed
+- Moved outdated launcher files to Archive/legacy_launchers/
+
 ## [3.0.0] - 2025-09-19
 
 ### Added
