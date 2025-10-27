@@ -30,6 +30,34 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def format_recipient_names(names_list):
+    """
+    Format a list of recipient names with commas and 'and' before the last name.
+
+    Args:
+        names_list: List of recipient names
+
+    Returns:
+        Formatted string like "John, Jane and Bob" or "John and Jane" or "John"
+    """
+    if not names_list:
+        return "Team"
+
+    # Filter out empty strings and strip whitespace
+    names = [name.strip() for name in names_list if name and name.strip()]
+
+    if not names:
+        return "Team"
+
+    if len(names) == 1:
+        return names[0]
+    elif len(names) == 2:
+        return f"{names[0]} and {names[1]}"
+    else:
+        # Join all but last with commas, then add "and" before last name
+        return ", ".join(names[:-1]) + " and " + names[-1]
+
+
 def generate_single_draft(customer, template, signature_html, sender_name, month, year, cc_emails=None):
     """Generate a single email draft for a customer
 
@@ -55,10 +83,10 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
         # Create new mail item
         mail = outlook.CreateItem(0)  # 0 = olMailItem
 
-        # Get recipient name - include ALL names
+        # Get recipient name - format with commas and 'and'
         recipient_names = customer.get('recipient_names', [])
-        if isinstance(recipient_names, list) and recipient_names:
-            recipient_name = " and ".join(recipient_names)
+        if isinstance(recipient_names, list):
+            recipient_name = format_recipient_names(recipient_names)
         else:
             recipient_name = 'Team'
 
@@ -78,8 +106,8 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
 
         # Build HTML body with signature
         html_body = f"""<html>
-        <body style="font-family: Aptos, 'Segoe UI', Calibri, sans-serif; font-size: 11pt;">
-        <p>{email_body.replace(chr(10), '<br>')}</p>
+        <body style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">
+        <p style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">{email_body.replace(chr(10), '<br>')}</p>
         <br>
         {signature_html}
         </body>
@@ -263,7 +291,7 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
             content_html = body.get('content', '').format(**all_values)
             # Convert line breaks to HTML
             content_html = content_html.replace('\n', '<br>')
-            body_content = f"<p>{content_html}</p>"
+            body_content = f'<p style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">{content_html}</p>'
         except KeyError as e:
             logger.error(f"Missing placeholder key in template: {e}")
             logger.error(f"Available keys: {list(all_values.keys())}")
@@ -277,13 +305,13 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
         closing = body.get('closing', 'Thanks,').format(**all_values)
 
         body_content = f"""
-            <p>{greeting}</p>
+            <p style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">{greeting}</p>
 
-            <p>{main_message}</p>
+            <p style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">{main_message}</p>
 
-            <p>{pricing_note}</p>
+            <p style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">{pricing_note}</p>
 
-            <p>{closing}</p>
+            <p style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">{closing}</p>
         """
 
     # Build signature
@@ -301,12 +329,12 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
     # Combine into full HTML
     html_body = f"""
     <html>
-        <body style="font-family: Aptos, 'Segoe UI', Calibri, sans-serif; font-size: 11pt;">
+        <body style="font-family: Aptos, Calibri, sans-serif; font-size: 11pt;">
             {body_content}
 
             {sig_html}
 
-            <p style="font-size: 10px;">
+            <p style="font-family: Aptos, Calibri, sans-serif; font-size: 10px;">
                 This email and any files transmitted with it are confidential and
                 intended solely for the use of the individual or entity to whom they are addressed.
             </p>
@@ -497,10 +525,10 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
                 subject_values['customer_name'] = customer_name
                 mail.Subject = selected_template.get('subject', 'Monthly Pricing Update for {customer_name}').format(**subject_values)
 
-                # Get recipient names
+                # Get recipient names - format with commas and 'and'
                 recipient_names = customer.get('recipient_names', [])
-                if isinstance(recipient_names, list) and recipient_names:
-                    recipient_name = " and ".join(recipient_names)
+                if isinstance(recipient_names, list):
+                    recipient_name = format_recipient_names(recipient_names)
                 else:
                     recipient_name = "Team"
 

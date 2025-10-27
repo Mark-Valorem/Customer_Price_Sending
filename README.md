@@ -1,14 +1,19 @@
-# Customer Price Sheet Automation v4.0.1
+# Customer Price Sheet Automation v4.0.2
 
-A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 4.0.1 includes bug fixes for CC emails, recipient names, and font styling.
+A streamlined Python automation system for creating Outlook email drafts with customer price sheets. Version 4.0.2 includes refinements to recipient name formatting and font styling.
 
-## 🚀 What's New in Version 4.0.1
+## 🚀 What's New in Version 4.0.2
 
 ### Bug Fixes
-- **CC Emails Now Configurable**: Settings tab now actually saves and uses CC email addresses
-- **All Recipient Names**: Email greetings now include ALL recipient names, not just the first one
-- **Font Styling Fixed**: Emails now use Aptos 11pt instead of defaulting to Times New Roman 12pt
-- **Settings Persistence**: CC email configuration saved to `config/app_settings.json`
+- **Proper Name Formatting**: Recipient names now formatted with commas (e.g., "Hi Arnie, Steve, Pares, Brad and Maria")
+- **Consistent Font Styling**: Aptos/Calibri 11pt now properly applies throughout entire email body
+- **No More "and and"**: Fixed duplicate "and" issue in recipient names
+- **Outlook Compatibility**: Font styling applied to all paragraph tags for proper rendering
+
+### Previous Updates (v4.0.1)
+- CC emails configurable via Settings tab
+- Settings persistence via `config/app_settings.json`
+- All recipient names included in greetings
 
 ### Previous Major Updates (v4.0.0)
 
@@ -136,9 +141,9 @@ python create_drafts_enhanced.py
 
 ## Version Information
 
-- **Current Version**: 4.0.1
+- **Current Version**: 4.0.2
 - **Major Features**: Verification system fixes, dashboard GUI, customer management
-- **Recent Fix**: Resolved customer verification error with JSON database compatibility
+- **Recent Fix**: Proper recipient name formatting and consistent Aptos/Calibri 11pt font styling
 - **Compatibility**: Windows (requires Microsoft Outlook)
 - **Python Support**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 - **HTML/CSS**: Template formatting

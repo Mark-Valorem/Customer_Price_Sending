@@ -4,7 +4,7 @@ A Python package for automating Outlook email draft creation
 with customer price sheets and PDF attachments.
 """
 
-__version__ = "4.0.1"
+__version__ = "4.0.2"
 __author__ = "Valorem"
 __email__ = "support@valorem.com.au"
 
