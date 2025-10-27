@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "cc_emails": [
+    "support@valorem.com.au",
+    "jasonn@valorem.com.au"
+  ],
+  "email_settings": {
+    "default_font": "Aptos",
+    "default_font_size": "11pt"
+  }
+}

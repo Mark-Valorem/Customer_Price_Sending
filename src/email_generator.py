@@ -30,7 +30,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def generate_single_draft(customer, template, signature_html, sender_name, month, year):
+def generate_single_draft(customer, template, signature_html, sender_name, month, year, cc_emails=None):
     """Generate a single email draft for a customer
 
     Args:
@@ -40,6 +40,7 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
         sender_name: Name of the sender
         month: Target month
         year: Target year
+        cc_emails: CC email addresses (semicolon-separated string)
 
     Returns:
         Dictionary with success status and any error messages
@@ -54,18 +55,10 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
         # Create new mail item
         mail = outlook.CreateItem(0)  # 0 = olMailItem
 
-        # Get recipient name
+        # Get recipient name - include ALL names
         recipient_names = customer.get('recipient_names', [])
         if isinstance(recipient_names, list) and recipient_names:
-            # Handle case where names are in a single string or multiple strings
-            if len(recipient_names) == 1 and ',' in recipient_names[0]:
-                # Single string with comma-separated names
-                recipient_name = recipient_names[0]
-            elif len(recipient_names) > 0:
-                # Multiple individual names or single name
-                recipient_name = recipient_names[0]
-            else:
-                recipient_name = 'Team'
+            recipient_name = " and ".join(recipient_names)
         else:
             recipient_name = 'Team'
 
@@ -85,7 +78,7 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
 
         # Build HTML body with signature
         html_body = f"""<html>
-        <body>
+        <body style="font-family: Aptos, 'Segoe UI', Calibri, sans-serif; font-size: 11pt;">
         <p>{email_body.replace(chr(10), '<br>')}</p>
         <br>
         {signature_html}
@@ -95,7 +88,7 @@ def generate_single_draft(customer, template, signature_html, sender_name, month
         # Set email properties
         mail.Subject = f"{month} {year} Price Update - {customer['company_name']}"
         mail.To = '; '.join(customer['email_addresses'])
-        mail.CC = 'support@valorem.com.au; jasonn@valorem.com.au'
+        mail.CC = cc_emails if cc_emails else 'support@valorem.com.au;jasonn@valorem.com.au'
         mail.HTMLBody = html_body
 
         # Add attachments if available
@@ -308,7 +301,7 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
     # Combine into full HTML
     html_body = f"""
     <html>
-        <body style="font-family: Arial, sans-serif;">
+        <body style="font-family: Aptos, 'Segoe UI', Calibri, sans-serif; font-size: 11pt;">
             {body_content}
 
             {sig_html}
@@ -324,7 +317,7 @@ def build_html_email_body(template, signature, custom_values, customer_name, rec
     return html_body
 
 
-def create_email_drafts_batch(template_key=None, custom_values=None, progress_callback=None):
+def create_email_drafts_batch(template_key=None, custom_values=None, progress_callback=None, cc_emails=None):
     """
     Creates draft emails in Outlook for all customers.
 
@@ -332,6 +325,7 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
         template_key: Key of the template to use (default: 'dashboard_custom' or 'default')
         custom_values: Dictionary of placeholder values
         progress_callback: Function to call with progress updates (current, total, message)
+        cc_emails: CC email addresses (semicolon-separated string)
 
     Returns:
         Dictionary with results:
@@ -496,7 +490,7 @@ def create_email_drafts_batch(template_key=None, custom_values=None, progress_ca
                     mail.To = str(email_addresses)
 
                 # Set CC
-                mail.CC = "support@valorem.com.au;jasonn@valorem.com.au"
+                mail.CC = cc_emails if cc_emails else "support@valorem.com.au;jasonn@valorem.com.au"
 
                 # Set the subject using template
                 subject_values = custom_values.copy()

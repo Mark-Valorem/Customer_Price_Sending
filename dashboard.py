@@ -531,6 +531,9 @@ class EmailDraftDashboard:
         # Setup UI
         self.setup_ui()
 
+        # Load settings after UI is set up
+        self.load_settings()
+
     def configure_styles(self):
         """Configure custom styles"""
         # Accent button style
@@ -888,6 +891,11 @@ Best regards,
         # Start generation in thread
         def generation_thread():
             try:
+                # Load settings to get CC emails
+                settings = self.load_settings()
+                cc_emails = settings.get('cc_emails', ['support@valorem.com.au', 'jasonn@valorem.com.au'])
+                cc_emails_str = ';'.join(cc_emails)
+
                 # Get all active customers
                 customers = self.customer_panel.database.get_all_customers()
                 active_customers = [c for c in customers if c.get('active', True)]
@@ -910,7 +918,8 @@ Best regards,
                             signature_html,
                             self.selected_user.get(),
                             self.month_var.get(),
-                            self.year_var.get()
+                            self.year_var.get(),
+                            cc_emails_str
                         )
 
                         if result['success']:
@@ -950,9 +959,55 @@ Best regards,
 
     def save_settings(self):
         """Save application settings"""
-        # Save CC emails and other settings
+        # Get CC emails from text widget
+        cc_text = self.cc_emails.get(1.0, tk.END).strip()
+        cc_list = [email.strip() for email in cc_text.split('\n') if email.strip()]
+
+        # Create config directory if needed
+        config_dir = 'config'
+        os.makedirs(config_dir, exist_ok=True)
+
+        # Load or create settings
+        settings_file = os.path.join(config_dir, 'app_settings.json')
+        if os.path.exists(settings_file):
+            with open(settings_file, 'r') as f:
+                settings = json.load(f)
+        else:
+            settings = {"version": "1.0.0", "cc_emails": [], "email_settings": {}}
+
+        # Update CC emails
+        settings['cc_emails'] = cc_list
+
+        # Save to file
+        with open(settings_file, 'w') as f:
+            json.dump(settings, f, indent=2)
+
         messagebox.showinfo("Settings", "Settings saved successfully!")
-        self.update_status("Settings saved")
+        self.update_status("Settings saved to config/app_settings.json")
+
+    def load_settings(self):
+        """Load application settings from config file"""
+        settings_file = os.path.join('config', 'app_settings.json')
+
+        if os.path.exists(settings_file):
+            try:
+                with open(settings_file, 'r') as f:
+                    settings = json.load(f)
+
+                # Load CC emails into text widget
+                cc_emails = settings.get('cc_emails', ['support@valorem.com.au', 'jasonn@valorem.com.au'])
+                self.cc_emails.delete(1.0, tk.END)
+                self.cc_emails.insert(1.0, '\n'.join(cc_emails))
+
+                return settings
+            except Exception as e:
+                self.add_debug_message(f"Error loading settings: {e}")
+
+        # Return defaults if file doesn't exist
+        return {
+            "cc_emails": ["support@valorem.com.au", "jasonn@valorem.com.au"],
+            "email_settings": {"default_font": "Aptos", "default_font_size": "11pt"}
+        }
 
     def update_status(self, message, level='info'):
         """Update status bar"""
